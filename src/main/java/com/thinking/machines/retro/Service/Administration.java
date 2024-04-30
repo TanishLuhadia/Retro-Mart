@@ -813,6 +813,7 @@ return "category";
 public String categories() 
 {
 UserBean user;
+System.out.println("I am in the carAdd");
 HttpSession session = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest().getSession();
 user=(UserBean) session.getAttribute("loggedInUser");
 if(user==null) return "login";

@@ -16,6 +16,7 @@
 			rel="stylesheet"
 		/>
 		<!-- <link rel="stylesheet" href="style.css" /> -->
+<link rel='stylesheet' href='jquery-ui-1.13.2/jquery-ui.css'>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -24,6 +25,8 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script src='jquery-ui-1.13.2/jquery-ui.js'></script>
+
     <!-- ... (Your other scripts) ... -->
     <!-- Your custom scripts -->
 
@@ -295,6 +298,60 @@
 		</style>
 <script>
 
+
+
+
+$(() => {
+$("#errorSection").hide();
+var lst = ["Car", "Bike", "Mobile", "Furniture","Alto 800", "Alto K10", "Ritz", "Aura", "Creta", "New Verna", "Tiago", "Nano", "Punch", "Bolt", "Elevate", "Amaze", "City","Maruti Suzuki","Hyundai","Tata","Honda", "Apache RTR 160", "Apache RTR 180", "Apache RTR 200 4V", "Apache RR 310", "Star City Plus", "Jupiter", "Ntorq 125", "Sport", "Hero Splendor","Hero Passion","Hero HF Deluxe","Hero Glamour","Hero Super Splendor","Hero Xtreme","Hero Xpulse","Pulsar", "Dominar", "Avenger", "Platina", "CT 100", "Chetak", "CBR1000RR", "CBR650R", "CBR500R", "CBR300R", "CBR250RR", "CB1100EX", "CB500F", "CB300R", "CB125R", "CRF1100L Africa Twin", "CRF300L", "CRF250 Rally", "CRF150L", "Super Cub C125", "ADV150","Honda","Bajaj","Hero","TVS"];
+$("#searchBox").autocomplete({
+source: lst,
+select: function (event, ui) {
+//alert("Selected item: "+ui.item.value);
+const carList=["Alto 800", "Alto K10", "Ritz", "Aura", "Creta", "New Verna", "Tiago", "Nano", "Punch", "Bolt", "Elevate", "Amaze", "City","Maruti Suzuki","Hyundai","Tata","Car","Honda"];
+var bikeList=["Apache RTR 160", "Apache RTR 180", "Apache RTR 200 4V", "Apache RR 310", "Star City Plus", "Jupiter", "Ntorq 125", "Sport", "Hero Splendor","Hero Passion","Hero HF Deluxe","Hero Glamour","Hero Super Splendor","Hero Xtreme","Hero Xpulse","Pulsar", "Dominar", "Avenger", "Platina", "CT 100", "Chetak", "CBR1000RR", "CBR650R", "CBR500R", "CBR300R", "CBR250RR", "CB1100EX", "CB500F", "CB300R", "CB125R", "CRF1100L Africa Twin", "CRF300L", "CRF250 Rally", "CRF150L", "Super Cub C125", "ADV150","Honda","Bajaj","Hero","TVS","Bike"];
+if(carList.includes(ui.item.value))
+{
+filterResults("car");
+}
+else if(bikeList.includes(ui.item.value))
+{
+filterResults("bike");
+}
+else
+{
+filterResults(ui.item.value.toLowerCase());
+}
+}
+});
+
+$("#searchBox").on("input", function () {
+filterResults($(this).val().toLowerCase());
+});
+
+function filterResults(searchWhat) {
+$("#errorSection").hide();
+$("#sec1>div").hide();
+var arr = ["car", "bike", "furniture", "mobile"];
+if (arr.includes(searchWhat)) {
+$("#sec1").find($("div." + searchWhat)).each(function () {
+$(this).show();
+});
+} else {
+$("#sec1>div").hide();
+$("#errorSection").show();
+// here
+}
+if (searchWhat === "") {
+$("#errorSection").hide();
+$("#sec1>div").show();
+}
+}
+});
+
+
+
+
 window.addEventListener("load", () => {
 
     const handleHover = (event) => {
@@ -404,73 +461,97 @@ window.addEventListener("load", () => {
 
     const dynamicContainer = document.getElementById("sec1");
 
-    const loadProductData = (productType) => {
-        const url = productType === 'car' ? "/car/getAll" : "/bike/getAll";
-        const imageEndpoint = productType === 'car' ? "/image/getImageByCarId" : "/image/getImageByBikeId";
+const loadProductData = () => {
+    const carUrl = "/car/getAll";
+    const bikeUrl = "/bike/getAll";
+    const carImageEndpoint = "/image/getImageByCarId";
+    const bikeImageEndpoint = "/image/getImageByBikeId";
 
-        loadData(url)
-            .then((data) => {
-                const promises = [];
-                for (let i = 0; i < data.length; i++) {
-                    const id = data[i].id;
-                    const email = data[i].email;
-                    promises.push(
-                        loadImageData(imageEndpoint, id)
+    // Load car data
+    loadData(carUrl)
+        .then((carData) => {
+            return Promise.all(carData.map((carItem) => {
+                const id = carItem.id;
+                const email = carItem.email;
+                return loadImageData(carImageEndpoint, id)
+                    .then((frontImage) => {
+                        return loadUserData("/user/getUser", email)
+                            .then((firstName) => {
+                                return {
+                                    frontImage: frontImage,
+                                    firstName: firstName,
+                                    data: carItem
+                                };
+                            });
+                    });
+            }));
+        })
+        .then((carResults) => {
+            // Load bike data
+            loadData(bikeUrl)
+                .then((bikeData) => {
+                    return Promise.all(bikeData.map((bikeItem) => {
+                        const id = bikeItem.id;
+                        const email = bikeItem.email;
+                        return loadImageData(bikeImageEndpoint, id)
                             .then((frontImage) => {
                                 return loadUserData("/user/getUser", email)
                                     .then((firstName) => {
                                         return {
                                             frontImage: frontImage,
                                             firstName: firstName,
-                                            data: data[i]
+                                            data: bikeItem
                                         };
                                     });
-                            })
-                    );
-                }
-                return Promise.all(promises);
-            })
-            .then((results) => {
-                results.forEach(({ frontImage, firstName, data }) => {
-                    const itemContainer = document.createElement("div");
-                    itemContainer.classList.add("imgContainer");
+                            });
+                    }));
+                })
+                .then((bikeResults) => {
+                    const allResults = carResults.concat(bikeResults);
+                    // Shuffle all results
+                    const shuffledResults = shuffleArray(allResults);
 
-                    const itemImage = document.createElement("img");
-                    itemImage.src = "/images/" + frontImage;
+                    shuffledResults.forEach(({ frontImage, firstName, data }) => {
+                        const itemContainer = document.createElement("div");
+                        itemContainer.classList.add("imgContainer");
+                        if (data.product == "car") itemContainer.classList.add("car");
+                        if (data.product == "bike") itemContainer.classList.add("bike");
+                        if (data.product == "mobile") itemContainer.classList.add("mobile");
+                        if (data.product == "furniture") itemContainer.classList.add("furniture");
 
-                    const itemPrice = document.createElement("div");
-                    itemPrice.innerHTML = `<span>&#8377;</span><h1>${data.price}</h1>`;
+                        const itemImage = document.createElement("img");
+                        itemImage.src = "/images/" + frontImage;
 
-                    const itemDescription = document.createElement("p");
-                    itemDescription.textContent = `${data.year} - ${data.driven} km`;
+                        const itemPrice = document.createElement("div");
+                        itemPrice.innerHTML = `<span>&#8377;</span><h1>${data.price}</h1>`;
 
-                    const itemLocation = document.createElement("div");
-                    itemLocation.classList.add("foot");
-                    itemLocation.innerHTML = `<h5>${data.city}</h5><h5>${data.date}</h5>`;
+                        const itemDescription = document.createElement("p");
+                        itemDescription.textContent = `${data.year} - ${data.driven} km`;
 
-                    itemContainer.appendChild(itemImage);
-                    itemContainer.appendChild(itemPrice);
-                    itemContainer.appendChild(itemDescription);
-                    itemContainer.appendChild(itemLocation);
+                        const itemLocation = document.createElement("div");
+                        itemLocation.classList.add("foot");
+                        itemLocation.innerHTML = `<h5>${data.city}</h5><h5>${data.date}</h5>`;
 
-                    // Attach event listeners
-                    itemContainer.addEventListener("mouseenter", handleHover);
-                    itemContainer.addEventListener("mouseleave", handleHover);
-                    itemContainer.addEventListener("click", (event) => handleClick(event, data));
+                        itemContainer.appendChild(itemImage);
+                        itemContainer.appendChild(itemPrice);
+                        itemContainer.appendChild(itemDescription);
+                        itemContainer.appendChild(itemLocation);
 
-                    dynamicContainer.appendChild(itemContainer);
-                });
-            })
-            .catch((error) => console.error("Error: ", error));
-    };
+                        // Attach event listeners
+                        itemContainer.addEventListener("mouseenter", handleHover);
+                        itemContainer.addEventListener("mouseleave", handleHover);
+                        itemContainer.addEventListener("click", (event) => handleClick(event, data));
 
-    // Load car data
-    loadProductData('car');
-    // Load bike data
-    loadProductData('bike');
+                        dynamicContainer.appendChild(itemContainer);
+                    });
+                })
+                .catch((error) => console.error("Error loading bike data: ", error));
+        })
+        .catch((error) => console.error("Error loading car data: ", error));
+};
 
-
-
+// Load product data
+loadProductData();
 
  $.ajax({
         url: "/getLoggedInUser",
@@ -515,6 +596,13 @@ else {
 
 
 });
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
 
 </script>
 
@@ -535,6 +623,7 @@ else {
 				<div id="search">
 					<input
 						type="text"
+id="searchBox"
 						placeholder="Find Cars, Mobile Phones and more..."
 					/>
 					<button id="navBtn">
@@ -551,6 +640,12 @@ else {
 			<!-- Hero Section -->
 			<div id="hero">
 				<h1>Fresh Recommendations...</h1>
+
+
+<div id='errorSection' style='color:red'>
+<p>Oops! No products found.</p>
+</div>
+
 				<div id="sec1">
 
 

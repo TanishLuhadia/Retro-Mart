@@ -5,7 +5,56 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Document</title>
 		<link rel="stylesheet" href="Bike.css" />
+<link rel='stylesheet' href='jquery-ui-1.13.2/jquery-ui.css'>
+
 <style>
+#loadingButton {
+  color: white;
+  background-color: #10B981;
+  --ring-color: #6EE7B7;
+  font-weight: 500;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  line-height: 2rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+  text-align: center;
+  margin-right: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  border: none;
+}
+
+#loadingButton:hover {
+  background-color: #059669;
+}
+
+#loadingButton:focus {
+  box-shadow: var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+}
+
+#loadingButton svg {
+  display: inline;
+  width: 1.3rem;
+  height: 1.3rem;
+  margin-right: 0.75rem;
+  color: white;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(-5px);
+  }
+
+  50% {
+    transform: translateY(5px);
+  }
+}
+
+
 label.error 
 {
             color: red; /* Change the color as needed */
@@ -211,7 +260,19 @@ label.error
 						name="numberOfOwner"
 					/>
 <br />
-<button type='submit' id='button1' >Validate</button>
+  
+  <button type='submit' id='button1'>Validate</button>
+
+
+
+<button id='loadingButton' class="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 inline-flex items-center" type="button" disabled="">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 100 101" class="inline w-4 h-4 mr-3 text-white animate-bounce" role="status" aria-hidden="true" >
+    <circle fill="#34D399" r="45" cy="50" cx="50"></circle>
+  </svg>
+  Loading...
+</button>
+
+
 
 				</form>
 			</fieldset>
@@ -225,6 +286,7 @@ label.error
     <!-- jQuery Validate -->
     <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 
+<script src='jquery-ui-1.13.2/jquery-ui.js'></script>
 
 
 
@@ -232,6 +294,9 @@ label.error
 let auth_token;
     $(document).ready(() => {
         // ... Your existing functions ...
+$("#loadingButton").hide();
+$("#button1").button();
+
 
 $.ajax({
 type:'get',
@@ -364,7 +429,9 @@ contactNumber: {
 
 },
                  submitHandler: function (event) {
- $("#button1").prop("disabled", true);
+ //$("#button1").prop("disabled", true);
+$("#button1").hide();
+$("#loadingButton").show();
 
 
             // Serialize form data
@@ -374,7 +441,10 @@ contactNumber: {
             // Perform AJAX post request to the server
             $.get("/sendOTPForBike", formData, function (data) {
                 // Handle the server response here
- $("#button1").prop("disabled", false);
+// $("#button1").prop("disabled", false);
+$("#button1").show();
+$("#loadingButton").hide();
+
                 if (data.status === "DELIVERED") {
                     window.location.href = '/otpBike';
                 } else {
