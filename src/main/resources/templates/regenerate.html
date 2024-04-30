@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link generation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+#invalidSpan{
+            color: red; 
+}
+#validSpan{
+            color: green; 
+}
+
+    </style>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+</head>
+<body>
+<h6 color:red>Link expire regenerate it</h6>
+    <h2>OTP Verification</h2>
+    <form id="emailForm">
+        <label for="email">Enter Email:</label>
+        <input type="email" id="email" name="email" required>
+        <br>
+        <button type="submit" >Regenrate</button>
+<span id='validSpan'></span>
+<span id='invalidSpan'></span>
+    </form>
+
+
+    <script>
+
+
+
+  $(document).ready(() => {
+           $("#invalidSpan").text("");
+           $("#validSpan").text("");
+
+            $("#emailForm").validate({
+                rules: {
+                    email: {
+                        required: true,
+email:true
+                    }                
+},
+                messages: {
+              email: {
+                        required: "Please enter Email",
+                        email: "Please enter a valid Email address"
+                    }
+               },
+                submitHandler: function (form) {
+                    // Your existing form submission logic
+                    $.get("/regenerate", { email: $("#email").val() })
+   .done(function(data) {
+
+       if (data.successful == true) {
+$("#invalidSpan").text("");
+                     $("#validSpan").text("Link generated");
+ $("#button1").prop("disabled", true);
+       } else {
+$("#validSpan").text("");
+             $("#invalidSpan").text(data.exception);
+       }
+
+   });
+
+
+
+}
+
+
+        });
+
+
+});
+    </script>
+</body>
+</html>

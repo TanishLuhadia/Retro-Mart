@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Refine Retro 1</title>
+		<!-- Stylesheets -->
+		<!-- Stylesheets -->
+<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+			rel="stylesheet"
+		/>
+		<!-- <link rel="stylesheet" href="style.css" /> -->
+
+
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <!-- ... (Your other scripts) ... -->
+    <!-- Your custom scripts -->
+
+		<!-- Your custom styles -->
+		<style>
+			* {
+				margin: 0%;
+				padding: 0%;
+				box-sizing: border-box;
+			}
+
+			body,
+			html {
+				height: 100%;
+				width: 100%;
+			}
+
+			/* Nav Styles */
+			nav {
+				height: 10vh;
+				width: 100vw;
+				background-color: #f5eded;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 2vw;
+				border-bottom: 1px solid black;
+			}
+
+			#logo span {
+				color: orangered;
+			}
+
+			nav #list {
+				display: flex;
+				gap: 1.5vw;
+			}
+
+			nav #list a {
+				text-decoration: none;
+				font-weight: 200;
+			}
+
+			nav a {
+				/* padding: 0.5vw 1vw; */
+				color: black;
+				font-size: 1.5vw;
+				border-radius: 50px;
+				padding: 0.5vw;
+			}
+
+			nav a:hover {
+				background-color: black;
+				color: #fff;
+			}
+
+			nav #search input {
+				height: 4.75vh;
+				width: 22vw;
+				border: 0.5px solid darkgrey;
+				padding: 1vw;
+			}
+
+			nav button {
+				height: 2.33vw;
+				width: 2.5vw;
+				position: absolute;
+				border: 1px solid darkgrey;
+				background-color: #fbefef;
+			}
+
+			#sec1 {
+				position: relative;
+    			left: -2%;
+    			padding-top: 2vw;
+    			width: 100vw;
+    			display: flex;
+    			flex-wrap: wrap;
+    			justify-content: space-evenly;
+			}
+
+			
+ .imgContainer {
+        height: 36vw;
+        width: 22vw;
+        border: 1px solid rgb(158, 155, 155);
+        padding: 1vw;
+        border-radius: 10px;
+        margin-bottom: 2vw;
+        background-color: #f5eded;
+        transition: all 0.3s ease; /* Smooth transition for all properties */
+    }
+
+    .imgContainer:hover {
+        transform: scale(1.05); /* Scale up the container on hover */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add shadow on hover */
+        border-color: red; /* Change border color on hover */
+    }
+
+			.imgContainer img {
+				height: 70%;
+				width: 100%;
+				object-fit: cover;
+				border-radius: 10px;
+			}
+
+
+			.imgContainer span {
+				content: "\20B9";
+				font-size: 2.5vw;
+				float: left;
+			}
+
+			#price {
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+			/* Hero Section Styles */
+			#hero {
+				/* background-color: #898686; */
+				min-height: 50vh;
+				width: 100%;
+				padding: 2vw;
+			}
+
+			#hero h1 {
+				font-size: 3vw;
+				color: black;
+			}
+
+			/* Our Services Section Styles */
+			/* #page2 {
+            /* margin-top: 7vw;
+            height: 50vh;
+            width: 100vw;
+            background-color: #f5eded;
+            padding: 0 5vw; */
+			/* position: fixed;
+            width: 100vw;
+            background-color: #f5eded;
+            padding: 0 5vw;
+        } */
+
+			#page2 {	
+				width: 100%;
+				background-color: #f5eded;
+				padding: 2vw;
+				margin-top: 2vw; /* Adjust as needed */
+			}
+
+			#page3 h1 {
+    padding: 2vw;
+    margin-left: 2%;
+    font-size: 4vw;
+}
+
+.team-heading {
+    padding: 2vw;
+    margin-left: 2%;
+    font-size: 4vw;
+}
+
+
+			#page2 p {
+				font-size: 1.5vw;
+				color: rgb(98, 95, 95);
+				font-family: sans-serif;
+				font-weight: 100;
+				line-height: 2.5vw;
+			}
+
+			#page2 p span {
+				color: black;
+				font-family: "DM Sans";
+				font-weight: 600;
+			}
+
+			/* Our Team Section Styles */
+			/* #page3 {
+            margin-top: 4vw;
+            height: 70vh;
+            width: 100vw;
+            padding: 0 5vw;
+        } */
+
+#page3 h1 {
+    display: block; 
+    width: auto; 
+    padding: 2vw;
+    margin-left: 2%;
+    font-size: 4vw;
+}
+.team-heading {
+    display: block;
+    width: auto;
+    padding: 2vw;
+    margin-left: 2%;
+    font-size: 4vw;
+}
+
+
+			#team {
+				display: flex;
+				align-items: center;
+				justify-content: space-evenly;
+			}
+
+			.box {
+    height: 18vw;
+    width: 18vw;
+    border: 2px solid #939090;
+    border-radius: 50%;
+    position: relative;
+    text-align: center; /* Center the text horizontally */
+    overflow: hidden; /* Ensure text doesn't overflow */
+}
+
+.box h2 {
+    font-size: 1.5vw; /* Adjust the font size */
+    color: black;
+    margin-top: 10px; /* Add some space above the text */
+    text-overflow: ellipsis; /* Add ellipsis if the text overflows */
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide any overflow */
+}
+
+
+			#ram {
+				margin-left: 3vw;
+			}
+
+			.box img {
+				height: 100%;
+				border-radius: 50%;
+			}
+
+			.same {
+				left: 2%;
+			}
+#main
+{
+overflow:hidden;
+}
+		</style>
+<script>
+window.addEventListener("load", () => {
+
+
+ const handleHover = (event) => {
+            event.target.classList.toggle("hovered");
+        };
+
+        const handleClick = (event, data) => {
+        const email = data.email; // Extracting email from data
+        $.ajax({
+            url: "/showMoreDetail",
+            method: "POST", // Use POST method for request
+            data: {
+                id: data.id,
+                email: data.email,
+product:data.product
+
+ // Adding email to data
+            },
+            success: function (response) {
+if(response.successful==false)
+{
+
+window.location.href = "/loginForPurchase.html";
+}
+else
+{
+
+
+
+        $.ajax({
+            url: "/addDetails",
+            method: "POST", // Use POST method for request
+            data: {
+                id: data.id,
+                email: data.email,
+product:data.product
+ // Adding email to data
+            },
+            success: function (response) {
+window.location.href = '/showDetails';
+  },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    }
+
+
+
+
+
+  
+          },
+            error: function (xhrr, statusz, errorrr) {
+                console.error("Error:", errorrr);
+            }
+        });
+    };
+
+
+            const navBtn = document.querySelector("#navBtn");
+
+            let i = 0;
+            navBtn.addEventListener("click", function () {
+                if (i == 0) {
+                    navBtn.style.border = "1px solid black";
+                    i = 1;
+                } else {
+                    navBtn.style.border = "1px solid darkgrey";
+                    i = 0;
+                }
+            });
+
+            const loadData = () => {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: "/car/getAll",
+                        method: "GET",
+                        success: function (data) {
+                            resolve(data);
+                        },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        },
+                    });
+                });
+            };
+
+            const loadImageData = (carId) => {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: "/image/getImageByCarId",
+                        method: "GET",
+                        data: { carId: carId },
+                        success: function (userData) {
+                            resolve(userData.frontImage);
+                        },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        },
+                    });
+                });
+            };
+
+            const loadUserData = (email) => {
+                return new Promise((resolve, reject) => {
+                    $.ajax({
+                        url: "/user/getUser",
+                        method: "GET",
+                        data: { email: email },
+                        success: function (userData) {
+                            resolve(userData.firstName);
+                        },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        },
+                    });
+                });
+            };
+
+            const dynamicContainer = document.getElementById("sec1");
+
+            loadData()
+                .then((data) => {
+                    const promises = [];
+                    for (let i = 0; i < data.length; i++) {
+                        const carId = data[i].id;
+                        const email = data[i].email;
+                        promises.push(
+                            loadImageData(carId)
+                                .then((frontImage) => {
+                                    return loadUserData(email)
+                                        .then((firstName) => {
+                                            return {
+                                                frontImage: frontImage,
+                                                firstName: firstName,
+                                                data: data[i]
+                                            };
+                                        });
+                                })
+                        );
+                    }
+                    return Promise.all(promises);
+                })
+                .then((results) => {
+                    results.forEach(({ frontImage, firstName, data }) => {
+                        const itemContainer = document.createElement("div");
+                        itemContainer.classList.add("imgContainer");
+
+                        const itemImage = document.createElement("img");
+                        itemImage.src = "/images/" + frontImage;
+
+                        const itemPrice = document.createElement("div");
+                        itemPrice.innerHTML = `<span>&#8377;</span><h1>${data.price}</h1>`;
+
+                        const itemDescription = document.createElement("p");
+                        itemDescription.textContent = `${data.year} - ${data.driven} km`;
+
+                        const itemLocation = document.createElement("div");
+                        itemLocation.classList.add("foot");
+                        itemLocation.innerHTML = `<h5>${data.city}</h5><h5>${data.date}</h5>`;
+
+                        itemContainer.appendChild(itemImage);
+                        itemContainer.appendChild(itemPrice);
+                        itemContainer.appendChild(itemDescription);
+                        itemContainer.appendChild(itemLocation);
+
+
+                // Attach event listeners
+                itemContainer.addEventListener("mouseenter", handleHover);
+                itemContainer.addEventListener("mouseleave", handleHover);
+                itemContainer.addEventListener("click", (event) => handleClick(event, data));
+
+                        dynamicContainer.appendChild(itemContainer);
+                    });
+                })
+                .catch((error) => console.error("Error: ", error));
+        });
+
+
+
+
+
+
+
+
+
+</script>
+	</head>
+	<body>
+		<div id="main">
+			<!-- Nav Section -->
+			<nav>
+				<div id="logo">
+					<h1>Refine <span>Retro</span></h1>
+				</div>
+				<div id="list">
+					<a href="#">Home</a>
+					<a href="#">Categories</a>
+					<a href="#">About Us</a>
+					<a href="#">Contact Us</a>
+				</div>
+				<div id="search">
+					<input
+						type="text"
+						placeholder="Find Cars, Mobile Phones and more..."
+					/>
+					<button id="navBtn">
+						<i class="ri-search-2-line"></i>
+					</button>
+				</div>
+				<a href="/login">Sell</a>
+			</nav>
+
+			<!-- Hero Section -->
+			<div id="hero">
+				<h1>Fresh Recommendations...</h1>
+				<div id="sec1">
+
+
+					<!-- Fresh recommendations will be dynamically populated here -->
+				</div>
+			</div>
+
+			<!-- Our Services Section -->
+			<div id="page2">
+				<h1>Our Services...</h1>
+				<p>
+					Welcome to <span>Refine Retro</span>, your go-to destination
+					for buying and selling pre-owned items! Whether you're
+					looking to declutter your home or find great deals on gently
+					used products, our platform connects buyers and sellers
+					seamlessly. Browse through a diverse range of listings, from
+					electronics and furniture to clothing and accessories.
+					Sellers can easily post their items, while buyers can find
+					what they need at unbeatable prices. Join our community
+					today and turn your unused items into cash or score amazing
+					finds!
+				</p>
+			</div>
+
+			<!-- Our Team Section -->
+			<div id="page3">
+				<h1 class="team-heading">Our Team...</h1>
+				<div id="team">
+					<div class="box">
+						<img
+							src="members/WhatsApp Image 2024-03-05 at 11.17.11_e757c323.jpg"
+							alt=""
+						/>
+						<h2>Vikas Choudhary</h2>
+					</div>
+					<div class="box">
+						<img
+							src="members/WhatsApp Image 2024-03-05 at 11.17.12_13d4f217.jpg"
+							alt=""
+						/>
+						<h2>Ram Rathore</h2>
+					</div>
+					<div class="box">
+						<img
+							src="members/WhatsApp Image 2024-03-05 at 11.17.11_666a02ad.jpg"
+							alt=""
+						/>
+						<h2>Pramod Parmar</h2>
+					</div>
+					<div class="box">			
+<img
+							src="members/WhatsApp Image 2024-03-05 at 11.17.12_9f9948f8.jpg"
+							alt=""
+						/>
+						<h3>Tanish Luhadia</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		
+	</body>
+</html>

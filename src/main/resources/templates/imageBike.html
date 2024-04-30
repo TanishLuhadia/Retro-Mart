@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        input[type="submit"] {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+#invalidSpan
+{
+color:red;
+}
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+<script>
+    function disableButton() {
+        var uploadButton = document.getElementById("uploadButton");
+        uploadButton.disabled = true;
+        uploadButton.value = "Uploading...";
+        uploadButton.style.backgroundColor = "#ccc"; // Change background color to gray
+        document.getElementById("invalidSpan").innerHTML = ""; // Clear any previous error messages
+        return true;
+    }
+</script>
+</head>
+<body>
+    <h1>Upload up to 5 files</h1>
+    
+    <form action="/uploadImagesBike" method="post" enctype="multipart/form-data" onsubmit="return disableButton();">
+    <label for="file1">File 1:</label>
+        <input type="file" name="file1" id="file1" accept="/*" required><br>
+
+        <label for="file2">File 2:</label>
+        <input type="file" name="file2" id="file2" accept="/*" required><br>
+
+        <label for="file3">File 3:</label>
+        <input type="file" name="file3" id="file3" accept="/*" required><br>
+
+        <label for="file4">File 4:</label>
+        <input type="file" name="file4" id="file4" accept="/*" required><br>
+
+        <label for="file5">File 5:</label>
+        <input type="file" name="file5" id="file5" accept="/*" required><br>
+<span id="invalidSpan"></span>
+        <input  type="submit" id='uploadButton' value="Upload">
+    </form>
+</body>
+</html>

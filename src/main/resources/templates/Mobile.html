@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="Mobile.css" />
+	</head>
+	<body>
+		<div id="main">
+			<header>
+				<h1>POST YOUR AD</h1>
+			</header>
+
+			<fieldset>
+				<form action="submit_ad.php" method="POST" id="adForm">
+					<label for="brand">Brand *</label><br />
+					<select
+						class="hero"
+						id="brands"
+						name="brands"
+						onchange="showbrands()"
+					>
+						<option value="Realme">Realme</option>
+                        <option value="Apple">Apple</option>
+                        <option value="Samsung">Samsung</option>
+                        <option value="Huawei">Huawei</option>
+                        <option value="Xiaomi">Xiaomi</option>
+                        <option value="OnePlus">OnePlus</option>
+                        <option value="Google">Google</option>
+                        <option value="Sony">Sony</option>
+                        <option value="LG">LG</option>
+                        <option value="Motorola">Motorola</option>
+                        <option value="Nokia">Nokia</option>
+                        <option value="HTC">HTC</option>
+                        <option value="OPPO">OPPO</option>
+                        <option value="Vivo">Vivo</option>
+                        <option value="Realme">Realme</option>
+                        <option value="Asus">Asus</option>
+                        <option value="Lenovo">Lenovo</option>
+                        <option value="ZTE">ZTE</option>
+                        <option value="TCL">TCL</option>
+                        <option value="Alcatel">Alcatel</option>
+                        <option value="BlackBerry">BlackBerry</option>
+                        <option value="Honor">Honor</option>
+                        <option value="Meizu">Meizu</option>
+                        <option value="Infinix">Infinix</option>
+					</select>
+
+					<br/>
+					<label for="year">Year * (Min 1980)</label><br />
+					<input
+						class="hero"
+						type="number"
+						id="year"
+						name="year"
+						required
+						min="1900"
+					/>
+					<span id="year-error" style="color: red"></span>
+
+
+					<br />
+					
+					
+					
+
+					
+					<label for="owners">No. of Owners *</label>
+					<div class="fuel" id="owners-buttons">
+						<button
+							type="button"
+							id="owner-1st"
+							class="chota-hero"
+							onclick="selectOwners(event, '1st')"
+						>
+							1st
+						</button>
+						<button
+							type="button"
+							id="owner-2nd"
+							class="chota-hero"
+							onclick="selectOwners(event, '2nd')"
+						>
+							2nd
+						</button>
+						<button
+							type="button"
+							id="owner-3rd"
+							class="chota-hero"
+							onclick="selectOwners(event, '3rd')"
+						>
+							3rd
+						</button>
+						<button
+							type="button"
+							id="owner-4th"
+							class="chota-hero"
+							onclick="selectOwners(event, '4th')"
+						>
+							4th
+						</button>
+						
+					</div>
+
+					<br />
+					<label for="title">Add Title * (Max 70 characters)</label>
+					<br />
+					<input
+						type="text"
+						class="hero"
+						id="conditions"
+						name="conditions"
+						maxlength="70"
+					/>
+					<span id="title-error" style="color: red"></span>
+
+					<br />
+					<label for="description"
+						>Description * (Max 5000 characters)</label
+					>
+					<br />
+					<textarea
+						name="features"
+						id="features"
+						placeholder="Type something here..."
+						maxlength="5000"
+					></textarea>
+					<span id="description-error" style="color: red"></span>
+					<br /><br />
+
+					<label for="country-state" id="country-state-label"
+						>State *</label
+					><br />
+					<select
+						class="hero"
+						id="state"
+						name="state"
+					>
+						<option value="">State</option>
+					</select>
+					<br />
+
+					<label for="city" id="city-label">City *</label><br />
+					<select class="hero" id="city" name="city">
+						<option value="">City</option>
+
+</select>
+
+					<br />
+					<h2>SET A PRICE</h2>
+					<label for="price">Price *</label><br />
+					<input type="number" class="hero" id="price" name="price" />
+					<br /><br />
+
+					<label for="mobile">Mobile Number *</label><br />
+					<input type="tel" class="hero" id="contactNumber" name="contactNumber" />
+
+					<input
+						type="hidden"
+						id="numberOfOwner"
+						name="numberOfOwner"
+					/>
+<br />
+<button type='submit' id='button1' >Validate</button>
+
+				</form>
+			</fieldset>
+		</div>
+		<script src="Mobile.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+
+
+
+<script>
+let auth_token;
+    $(document).ready(() => {
+        // ... Your existing functions ...
+
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/getaccesstoken",
+success:function(data){
+auth_token=data.auth_token;
+getCountry(data.auth_token);
+alert('ajax');
+},
+error:function(error){
+alert('error');
+},
+headers:{
+ "Accept": "application/json",
+    "api-token": "qGD-9FN6UzIW5LLLMUjFGVnr8gcaVptGZQGj0B80NEZDIC0ltbnk06SUZYNAkzibYmo",
+    "user-email": "tanishjain7566669375@gmail.com"
+
+}
+});
+$("#state").change(function(){
+getCity();
+});
+alert("Hello");
+
+
+
+
+            $("#adForm").validate({
+                rules: {
+                    brand: {
+                        required: true
+                                          },
+                    model: {
+                        required: true
+                    },
+
+year: {
+                        required: true
+                    },
+
+fuel: {
+                        required: true
+                    },
+                    
+                   driven: {
+                        required: true
+                    },
+numberOfOwner: {
+                        required: true
+                    },
+conditions: {
+                        required: true
+                    },
+ features: {
+                        required: true
+                    },
+state: {
+                        required: true
+                    },
+city: {
+                        required: true
+                    },
+price: {
+                        required: true
+                    },
+contactNumber: {
+                        required: true
+                    }
+
+
+
+
+
+
+
+
+
+                },
+                messages: {
+                    
+                    brand: {
+                        required: "Please enter Brand"
+                    },
+                    model: {
+                        required: "Please enter Model"
+                    },               
+
+                    year: {
+                        required: "Please enter year"
+                    },               
+                    fuel: {
+                        required: "Please enter fuel"
+                    },               
+                                 
+                    driven: {
+                        required: "Please enter driven"
+                    },               
+                    numberOfOwner: {
+                        required: "Please enter Number of owner"
+                    },               
+                    conditions: {
+                        required: "Please enter Conditions"
+                    },               
+                    features: {
+                        required: "Please enter Features"
+                    },               
+                    model: {
+                        required: "Please enter Model"
+                    },               
+                    state: {
+                        required: "Please enter State"
+                    },               
+                    city: {
+                        required: "Please enter city"
+                    },               
+                    price: {
+                        required: "Please enter Price"
+                    },               
+
+contactNumber: {
+                        required: "Please enter Contact number"
+                    }               
+
+
+
+
+
+
+
+
+
+
+
+},
+                 submitHandler: function (event) {
+ $("#button1").prop("disabled", true);
+
+
+            // Serialize form data
+
+            var formData = $("#adForm").serialize();
+
+            // Perform AJAX post request to the server
+            $.get("/sendOTPForBike", formData, function (data) {
+                // Handle the server response here
+ $("#button1").prop("disabled", false);
+                if (data.status === "DELIVERED") {
+                    window.location.href = '/otpBike';
+                } else {
+                    $("#invalidSpan").text("Please enter valid phone number");
+                }
+            });
+return false;
+        }
+    });
+});
+function getCountry(auth_token)
+{
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/countries/",
+success:function(data){
+alert(data);
+getState(auth_token);
+},
+error:function(error){
+alert('error');
+},
+headers:{
+"Authorization": "Bearer "+auth_token ,
+  "Accept": "application/json"
+}
+});
+
+
+}
+
+function getState()
+{
+let country_name='India';
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/states/"+country_name,
+success:function(data){
+$("#state").empty();
+data.forEach(element=>{
+$("#state").append('<option value="'+element.state_name+'">'+element.state_name+'</option>');
+});
+},
+error:function(error){
+alert('error');
+},
+headers:{
+"Authorization": "Bearer "+auth_token ,
+  "Accept": "application/json"
+}
+});
+
+
+}
+
+
+function getCity()
+{
+let state_name=$("#state").val();
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/cities/"+state_name,
+success:function(data){
+$("#city").empty();
+data.forEach(element=>{
+$("#city").append('<option value="'+element.city_name+'">'+element.city_name+'</option>');
+});
+
+
+},
+error:function(error){
+alert('error');
+},
+headers:{
+"Authorization": "Bearer "+auth_token ,
+  "Accept": "application/json"
+}
+});
+
+
+}
+
+
+
+
+
+
+</script>
+
+	</body>
+</html>

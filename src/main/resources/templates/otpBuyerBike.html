@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Number Verification</title>
+  <link rel="stylesheet" href="otp.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Mobile Number Verification</h2>
+    <form id='form1'>      
+<input type="text" id="otp" name='otp' splaceholder="Enter OTP">
+<span id='invalidSpan'></span>
+      <button id='button1' type='submit'>Verify OTP</button>
+</form>   
+    <p id="message"></p>
+  </div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+  <script >
+  
+ $(document).ready(() => {
+             
+
+            $("#form1").validate({
+                rules: {
+                    otp: {
+                        required: true
+                                          }
+                },
+                messages: {
+                    
+  otp: {
+                        required: "Please enter OTP"
+                    }
+},
+                 submitHandler: function (event) {
+
+ $("#button1").prop("disabled", true);
+
+     $.get("/validateOTPBuyer", { otp: $("#otp").val(), }, function (data) {
+    if (data === "OTP is valid!") {
+ $("#button1").prop("disabled", false);
+
+        window.location.href = '/successfulBuyerBike';
+    } else {
+ $("#button1").prop("disabled", false);
+
+        $("#invalidSpan").text("Invalid OTP ");
+    }
+});
+return false;
+        }
+    });
+});
+</script>
+
+
+
+</body>
+</html>

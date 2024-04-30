@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title></title>
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+		/>
+		<link rel="stylesheet" href="style1.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+<script>
+$(()=>{
+
+                    $.ajax({
+                        url: "/getBikeId",
+                        method: "Post",
+                        success: function (data) {
+                            
+
+
+$.ajax({
+                        url: "/getEmail",
+                        method: "Post",
+                        success: function (email) {
+                            
+
+
+$.ajax({
+                        url: "/user/getUser",
+                        method: "Get",
+data:{
+"email":email
+},
+                        success: function (user) {
+                            
+
+$.ajax({
+                        url: "/image/getImageByBikeId",
+                        method: "Get",
+data:{
+"bikeId":data
+},
+                        success: function (Image) {
+                            
+var imageUrl1 = "/images/"+Image.frontImage;
+var imageUrl2 = "/images/"+Image.leftSideImage;
+var imageUrl3 = "/images/"+Image.rightSideImage;
+var imageUrl4 = "/images/"+Image.backImage;
+var imageUrl5 = "/images/"+Image.topImage;
+var imageUrls = [
+        imageUrl1,
+        imageUrl2,
+        imageUrl3,
+        imageUrl4,
+        imageUrl5
+    ];
+
+    $.each(imageUrls, function(index, imageUrl) {
+        // Create a new img element
+      var img = $('<img>').addClass('swiper-slide');
+
+       img.attr('src', imageUrl);
+        // Append the img element to the container with id "image-container"
+       if(index==0)  $('#image1').append(img);
+else if(index==1)  $('#image2').append(img);
+else if(index==2)  $('#image3').append(img);
+else if(index==3)  $('#image4').append(img);
+else     $('#image5').append(img);
+
+
+});
+
+
+
+
+
+
+
+
+$.ajax({
+                        url: "/bike/getBikeByBikeId",
+                        method: "Get",
+data:{
+"bikeId":data
+},
+                        success: function (bikeData) {
+                            
+
+$("#brandName").html(bikeData.brand + " " + bikeData.model + " (" + bikeData.year + ")");
+$("#fuel").html(bikeData.fuel);
+$("#driven").html(bikeData.driven+" KM ");
+$("#numberOfOwner").html(bikeData.numberOfOwner);
+$("#city").html(bikeData.city);
+$("#date").html(bikeData.date);
+$("#features").html(bikeData.features);
+$("#price").html("&#8377;" + bikeData.price);
+
+
+
+
+ },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+ },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        }
+                    });
+
+
+
+
+
+
+
+
+ },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        }
+                    });
+
+
+
+
+
+
+
+
+
+ },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        }
+                    });
+
+
+
+
+
+
+                        },
+                        error: function (xhr, status, error) {
+                            reject(error);
+                        }
+                    });
+
+});
+function chatWithCustomer()
+{
+window.location.href = "chatWithCustomerBikePage.html";
+}
+</script>
+	</head>
+	<body>
+
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/newIndex">
+                <i class="fas fa-home"></i> <!-- Home icon -->
+            </a>
+            <!-- You can add additional navigation items here -->
+        </div>
+    </nav>
+
+		<div id="main">
+			<!-- Swiper -->
+			<div id="img-container">
+				<div class="swiper mySwiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide" id='image1'>
+							<img  src="" alt="">
+						</div>
+						<div class="swiper-slide" id='image2'>
+							<img  src="" alt="">
+						</div>
+						<div class="swiper-slide" id='image3'>
+							<img  src="" alt="">
+						</div>
+						<div class="swiper-slide" id='image4'>
+							<img  src="" alt="">
+						</div>
+						<div class="swiper-slide" id='image5'>
+							<img  src="" alt="">
+						</div>
+					</div>
+					<div class="swiper-button-next"></div>
+    				<div class="swiper-button-prev"></div>
+					<div class="swiper-pagination"></div>
+				</div>
+			</div>
+
+			<div id="text-container">
+				<div id="product-name" class="for-padding">
+					<h1 id='brandName'></h1>
+					<div id="product-type">
+						<p id='fuel'></p>
+						<p id='driven'></p>
+					</div>
+				</div>
+				<div id="overview" class="for-padding">
+					<h4>Overview</h4>
+					<div id="in-overview">
+						<div id="owner-no">
+							<p>Owner</p>
+							<h2 id='numberOfOwner'></h2>
+						</div>
+						<div id="owner-location">
+							<p>Location</p>
+							<h2 id='city'></h2>
+						</div>
+						<div id="posting">
+							<p>posting date</p>
+							<h2 id='date'></h2>
+						</div>
+					</div>
+				</div>
+	
+				<div id="description" class="for-padding">
+					<h1>Description</h1>
+					<p id='features'>
+						
+					</p>
+				</div>
+
+				<div id="product-price" class="for-padding">
+<h4>Price</h4>
+					<h1 id='price'> </h1>
+				</div>
+
+				<div id="contact" class="for-padding">
+  <h2>Want to chat with customer</h2><br>
+  <button id="chatBtn" onclick='chatWithCustomer()'><h2>Chat with customer</h2></button>
+</div>
+
+				
+			</div>
+		</div>
+
+		<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+		<script src="script1.js"></script>
+	</body>
+</html>

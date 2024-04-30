@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Phone Number Verified</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #4CAF50;
+        }
+
+        p {
+            color: #333;
+            font-size: 18px;
+        }
+
+        .button {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .button:hover {
+            background-color: #45a049;
+        }
+
+        #invalidSpan {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Phone Number Verified</h2>
+        <p>Congratulations! Your phone number has been successfully verified and your details is shared with a seller , he will get to you soon.</p>
+        <span id="invalidSpan"></span>
+        <button class="button" id="openImagePageBtn" onclick='cool()'>Home</button>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+function cool()
+{
+window.location.href = '/newIndex.html';
+}
+</script>
+
+</body>
+
+</html>

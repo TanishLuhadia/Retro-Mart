@@ -1,0 +1,43 @@
+.container {
+    max-width: 400px;
+    margin: 50px auto;
+    text-align: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+input, button {
+    margin: 10px;
+    padding: 8px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+button {
+    background-color: #ff7f50; /* Coral color */
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #ff6347; /* Tomato color */
+}
+
+#invalidSpan {
+    color: #dc143c; /* Crimson color */
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="furniture.css" />
+	</head>
+	<body>
+		<div id="main">
+			<header>
+				<h1>POST YOUR AD</h1>
+			</header>
+
+			<fieldset>
+				<form action="submit_ad.php" method="POST" id="adForm">
+					<label for="Type">Type *</label><br />
+					<select
+						class="hero"
+						id="brands"
+						name="brands"
+						onchange="showbrands()"
+					>
+                    <option value="Table">Table</option>
+                    <option value="Chair">Chair</option>
+                    <option value="Bed">Bed</option>
+                    <option value="Sofa">Sofa</option>
+                </select>
+                <br/>
+
+				
+					<label for="year">Year * (Min 1980)</label><br />
+					<input
+						class="hero"
+						type="number"
+						id="year"
+						name="year"
+						required
+						min="1900"
+					/>
+					<span id="year-error" style="color: red"></span>
+
+
+					<br />
+					
+					
+					
+
+					
+					<label for="owners">No. of Owners *</label>
+					<div class="fuel" id="owners-buttons">
+						<button
+							type="button"
+							id="owner-1st"
+							class="chota-hero"
+							onclick="selectOwners(event, '1st')"
+						>
+							1st
+						</button>
+						<button
+							type="button"
+							id="owner-2nd"
+							class="chota-hero"
+							onclick="selectOwners(event, '2nd')"
+						>
+							2nd
+						</button>
+						<button
+							type="button"
+							id="owner-3rd"
+							class="chota-hero"
+							onclick="selectOwners(event, '3rd')"
+						>
+							3rd
+						</button>
+						<button
+							type="button"
+							id="owner-4th"
+							class="chota-hero"
+							onclick="selectOwners(event, '4th')"
+						>
+							4th
+						</button>
+						
+					</div>
+
+					<br />
+                    <label for="condition">Condition:</label>
+                    <select id="condition" name="condition">
+                        <option value="excellent">Excellent</option>
+                        <option value="good">Good</option>
+                        <option value="fair">Fair</option>
+                    </select>
+                    <br/><br>
+					<label for="title">Add Title * (Max 70 characters)</label>
+					<br />
+					<input
+						type="text"
+						class="hero"
+						id="title"
+						name="title"
+						maxlength="70"
+					/>
+					<span id="title-error" style="color: red"></span>
+
+					<br />
+					<label for="description"
+						>Description * (Max 5000 characters)</label
+					>
+					<br />
+					<textarea
+						name="description"
+						id="description"
+						placeholder="Type something here..."
+						maxlength="5000"
+					></textarea>
+					<span id="description-error" style="color: red"></span>
+					<br /><br />
+
+					<label for="country-state" id="country-state-label"
+						>State *</label
+					><br />
+					<select
+						class="hero"
+						id="country-state"
+						name="country-state"
+						onchange="populateCities()"
+					>
+						<option value=""></option>
+						<option value="AN">Andaman and Nicobar Islands</option>
+						<option value="AP">Andhra Pradesh</option>
+						<option value="AR">Arunachal Pradesh</option>
+						<option value="AS">Assam</option>
+						<option value="BR">Bihar</option>
+						<option value="CH">Chandigarh</option>
+						<option value="CT">Chhattisgarh</option>
+						<option value="DN">Dadra and Nagar Haveli</option>
+						<option value="DD">Daman and Diu</option>
+						<option value="DL">Delhi</option>
+						<option value="GA">Goa</option>
+						<option value="GJ">Gujarat</option>
+						<option value="HR">Haryana</option>
+						<option value="HP">Himachal Pradesh</option>
+						<option value="JK">Jammu and Kashmir</option>
+						<option value="JH">Jharkhand</option>
+						<option value="KA">Karnataka</option>
+						<option value="KL">Kerala</option>
+						<option value="LA">Ladakh</option>
+						<option value="LD">Lakshadweep</option>
+						<option value="MP">Madhya Pradesh</option>
+						<option value="MH">Maharashtra</option>
+						<option value="MN">Manipur</option>
+						<option value="ML">Meghalaya</option>
+						<option value="MZ">Mizoram</option>
+						<option value="NL">Nagaland</option>
+						<option value="OR">Odisha</option>
+						<option value="PY">Puducherry</option>
+						<option value="PB">Punjab</option>
+						<option value="RJ">Rajasthan</option>
+						<option value="SK">Sikkim</option>
+						<option value="TN">Tamil Nadu</option>
+						<option value="TG">Telangana</option>
+						<option value="TR">Tripura</option>
+						<option value="UP">Uttar Pradesh</option>
+						<option value="UT">Uttarakhand</option>
+						<option value="WB">West Bengal</option>
+						<!-- Add options for other states... -->
+					</select>
+					<br />
+
+					<label for="city" id="city-label">City *</label><br />
+					<select class="hero" id="city" name="city"></select>
+
+					<br />
+					<h2>SET A PRICE</h2>
+					<label for="price">Price *</label><br />
+					<input type="number" class="hero" id="price" name="price" />
+					<br /><br />
+
+					<label for="mobile">Mobile Number *</label><br />
+					<input type="tel" class="hero" id="mobile" name="mobile" />
+
+					<!-- The hidden input field -->
+					<input
+						type="hidden"
+						id="selectedFuel"
+						name="selectedFuel"
+					/>
+					<input
+						type="hidden"
+						id="selectedTransmission"
+						name="selectedTransmission"
+					/>
+					<input
+						type="hidden"
+						id="selectedOwners"
+						name="selectedOwners"
+					/>
+				</form>
+			</fieldset>
+		</div>
+		<script src="furniture.js"></script>
+	</body>
+</html>
+
+

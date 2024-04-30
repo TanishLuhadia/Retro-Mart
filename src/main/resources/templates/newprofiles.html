@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>User Profile</title>
+		<style>
+			* {
+				margin: 0%;
+				padding: 0%;
+				box-sizing: border-box;
+			}
+			body,
+			html {
+				width: 100%;
+				height: 100%;
+			}
+
+			#main {
+				display: flex;
+				height: 100vh;
+				width: 100vw;
+				padding: 2vw;
+			}
+
+			#left-part {
+				width: 35%;
+				border: 1px solid black;
+				margin-right: 1vw;
+				padding: 6vw;
+				text-align: center;
+				border-radius: 5px;
+			}
+
+			b {
+				font-size: 1.5vw;
+			}
+
+			#right-part {
+			}
+
+			#profile-picture {
+				width: 12vw;
+				height: 12vw;
+				padding: 3px;
+				border-radius: 50%;
+				align-items: center;
+				position: relative;
+				left: 25%;
+				margin-bottom: 1vw;
+			}
+
+			#profile-picture button {
+				border-radius: 50%;
+				border: none;
+			}
+
+			#profile-picture img {
+				position: relative;
+				width: 100%;
+				height: 100%;
+				border-radius: 50%;
+				left: -9%;
+			}
+
+			#editModal {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.7);
+				justify-content: center;
+				align-items: center;
+			}
+
+	#deleteModal {
+				display: none;
+				position: fixed;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.7);
+				justify-content: center;
+				align-items: center;
+			}
+
+			.modal-content {
+				background-color: #fff;
+				padding: 1vw;
+				border-radius: 5px;
+				width: 50%;
+				text-align: center;
+			}
+
+			.modal-content label {
+				display: block;
+				margin-bottom: 10px;
+				position: absolute;
+				left: 27%;
+			}
+
+			input[type="text"],
+			input[type="email"] {
+				width: 50%;
+				padding: 10px;
+				margin-bottom: -15px;
+			}
+
+			button[type="button"] {
+				margin-top: 1vw;
+				position: relative;
+				padding: 10px 20px;
+				background-color: #4000ff;
+				color: #fff;
+				border: none;
+				border-radius: 4px;
+				cursor: pointer;
+				/* margin-bottom: 0vw; */
+				bottom: 0.5vw;
+				left: 32%;
+			}
+
+			#b1 {
+				margin-top: 4vw;
+				margin-bottom: 1vw;
+				background-color: black;
+				color: #fff;
+			}
+
+			#upload-button {
+				position: relative;
+				width: 17vw;
+				height: 8vh;
+				left: 5%;
+				margin-top: 2vw;
+				display: block;
+				padding: 1vw;
+				margin-left: 0.1vw;
+				background-color: #ff3c00;
+				color: #fff;
+				font-size: 1.2vw;
+				cursor: pointer;
+				border-radius: 4px;
+			}
+
+			.input-image {
+				display: none;
+			}
+
+			button {
+				position: relative;
+				width: 17vw;
+				height: 8vh;
+				left: 5%;
+				margin-top: 1vw;
+				display: block;
+				padding: 1vw;
+				margin-left: 0.1vw;
+				background-color: #4000ff;
+				color: #fff;
+				font-size: 1.2vw;
+				cursor: pointer;
+				border-radius: 4px;
+				border: none;
+			}
+
+			.form-text {
+				font-size: 2vw;
+			}
+
+			#form-label {
+				margin-bottom: 2vw;
+			}
+
+			#hero {
+				/* background-color: #898686; */
+				min-height: 50vh;
+				width: 100%;
+				padding: 1vw;
+			}
+
+			/* right part */
+			#page2 {
+				width: 100%;
+				background-color: #f5eded;
+				padding: 2vw;
+				margin-top: 2vw; /* Adjust as needed */
+			}
+
+			#sec1 {
+				position: relative;
+				padding-top: 1vw;
+				width: 100%;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-evenly;
+			}
+
+			.imgContainer {
+				height: 22vw;
+				width: 15vw;
+				border: 1px solid rgb(158, 155, 155);
+				padding: 1vw;
+				border-radius: 10px;
+				margin-bottom: 2vw;
+				background-color: #f5eded;
+			}
+
+			.imgContainer img {
+				height: 60%;
+				width: 100%;
+				object-fit: cover;
+				border-radius: 10px;
+			}
+
+			.imgContainer span {
+				content: "\20B9";
+				font-size: 2.5vw;
+				float: left;
+			}
+
+			#price {
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+			h1#userName {
+				width: 115%;
+			}
+		</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+	</head>
+
+	<body>
+ 
+
+		<div id="main">
+			<div id="left-part">
+				<div id="profile-picture">
+					<img
+						id="myImage"
+						src="./1000_F_589932782_vQAEAZhHnq1QCGu5ikwrYaQD0Mmurm0N (1).jpg"
+						alt="sample image"
+					/>
+				</div>
+				<h1 id="userFirstName">Unknown user</h1>
+<h1 id="userLastName">XYZ</h1>
+				<br />
+				<h3 id="userEmail">Unknown</h3>
+				<br />
+				<label for="input-image" id="upload-button">Upload Image</label>
+				<input
+					type="file"
+					accept="image/jpg, image/jpeg, image/png"
+					id="input-image"
+					class="input-image"
+				/>
+				<button onclick="openModal()">Edit Info</button>
+			</div>
+
+ <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="/newIndex">
+                <i class="fas fa-home"></i> <!-- Home icon -->
+            </a>
+            <!-- You can add additional navigation items here -->
+        </div>
+    </nav>
+
+			<div id="right-part">
+				<div id="hero">
+					<div id="sec1">
+												<!-- Fresh recommendations will be dynamically populated here -->
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div id="editModal">
+			<div class="modal-content">
+				<h2 id="form-label">Edit Profile</h2>
+				<form id="editForm">
+					<label for="editFirstName" class="form-text">First Name:</label>
+					<input type="text" id="editFirstName" /><br /><br />
+
+					<label for="editLastName" class="form-text">Last Name:</label>
+					<input type="text" id="editLastName" /><br /><br />
+
+					<button type="button" onclick="saveChanges()">Save</button>
+					<button type="button" onclick="closeModal()">Close</button>
+				</form>
+			</div>
+		</div>
+
+<div id="deleteModal">
+			<div class="modal-content">
+				<h2 id="form-label">Delete</h2>
+				<form id="editForm">
+				<h1 style='color:red'>Are you sure to delete this item!!<h1>
+					<button type="button" onclick="saveDelete()">Delete
+
+</button>
+					<button type="button" onclick="closeDeleteModal()">Close</button>
+				</form>
+			</div>
+		</div>
+
+
+		<script>
+			const profilePic = document.getElementById("myImage");
+			const inputFile = document.getElementById("input-image");
+			const userFirstName = document.getElementById("userFirstName");
+			const userEmail = document.getElementById("userEmail");
+const userLastName = document.getElementById("userLastName");
+			
+			inputFile.onchange = function () {
+				profilePic.src = URL.createObjectURL(inputFile.files[0]);
+			};
+
+			function openModal() {
+				const currentFirstName = userFirstName.innerText;
+				const currentLastName = userLastName.innerText;
+	
+				document.getElementById("editFirstName").value = currentFirstName;
+				document.getElementById("editLastName").value = currentLastName;
+				
+				document.getElementById("editModal").style.display = "flex";
+			}
+
+			function closeModal() {
+				document.getElementById("editModal").style.display = "none";
+			}
+function closeDeleteModal() {
+				document.getElementById("deleteModal").style.display = "none";
+			}
+var products;
+var ids;
+function Delete(product,id)
+{
+products=product;
+ids=id;
+}
+function saveDelete()
+{
+if(products=="car")
+{
+$.ajax({
+    url: "/delete/car",
+    method: "Post",
+data:{
+"carId":ids
+},
+    success: function(data) {
+            window.location.href="/newprofile";      
+},
+             error: function(xhr, status, error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        });
+    
+
+
+}
+else
+{
+
+$.ajax({
+    url: "/delete/bike",
+    method: "Post",
+data:{
+"bikeId":ids
+},
+    success: function(data) {
+                  
+},
+             error: function(xhr, status, error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        });
+}
+
+
+
+
+
+closeDeleteModal();
+}
+
+			function saveChanges() {
+				const newFirstName = document.getElementById("editFirstName").value;
+				const newLastName = document.getElementById("editLastName").value;
+				
+				userFirstName.innerText = newFirstName;
+				userLastName.innerText = newLastName;
+
+$.ajax({
+    url: "/getLoggedInUser",
+    method: "GET",
+    success: function(data) {
+        $.ajax({
+            url: "/user/getUser",
+            method: "GET",
+            data: {
+                "email": data
+            },
+            success: function(user) {
+                $.ajax({
+                    url: "/user/update",
+                    method: "POST",
+                    data: {
+                        "email": data,
+"firstName":newFirstName,
+"lastName":newLastName
+                    },
+                    success: function(update) {
+                            
+if(update=="Updated")
+{
+}
+},
+
+
+
+
+
+
+
+
+
+
+                    error: function(xhr, status, error) {
+                        console.error("Failed to fetch car data:", error);
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        });
+    },
+    error: function(xhr, status, error) {
+        console.error("Failed to fetch logged-in user:", error);
+    }
+});
+
+
+
+
+
+
+				closeModal();
+			}
+		</script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+<script>
+$(() => {
+    $("#input-image").change((ev) => {
+        // Create FormData object to handle file upload
+        var formData = new FormData();
+        formData.append('file1', ev.target.files[0]); // Assuming only one file is selected
+
+        $.ajax({
+            url: "/uploadProfile",
+            method: "POST",
+            data: formData,
+            processData: false, // Don't process the data
+            contentType: false, // Don't set content type
+            success: function(data) {
+                if (data == 'Uploaded') {
+                    alert("Done");
+                } else {
+                    alert("Problem");
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error("Failed to fetch image:", error);
+                alert("Error uploading image. Please try again later.");
+            }
+        });
+    });
+
+    const dynamicContainer = document.getElementById("sec1");
+
+    $.ajax({
+        url: "/getLoggedInUser",
+        method: "GET",
+        success: function(data) {
+            $.ajax({
+                url: "/user/getUser",
+                method: "GET",
+                data: {
+                    "email": data
+                },
+                success: function(user) {
+                    $("#userFirstName").html(user.firstName);
+                    $("#userLastName").html(user.lastName);
+                    $("#userEmail").html(data);
+
+                    $.ajax({
+                        url: "/car/getByEmail",
+                        method: "POST",
+                        data: {
+                            "email": data
+                        },
+                        success: function(cars) {
+                            $.ajax({
+                                url: "/getProfile",
+                                method: "POST",
+                                data: {
+                                    "email": data
+                                },
+                                success: function(dataaa) {
+                                    if (dataaa.successful == true) {
+                                        profilePic.src = "/images/" + dataaa.result;
+                                    } else {
+                                        profilePic.src = "/" + dataaa.result;
+                                    }
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error("Failed to fetch image:", error);
+                                    alert("Error uploading image. Please try again later.");
+                                }
+                            });
+  if (Array.isArray(cars)) {
+
+                            cars.forEach(function(car) {
+                                $.ajax({
+                                    url: "/image/getImageByCarId",
+                                    method: "GET",
+                                    data: {
+                                        "carId": car.id
+                                    },
+                                    success: function(imageData) {
+                                        const itemContainer = document.createElement("div");
+                                        itemContainer.classList.add("imgContainer");
+
+                                        const itemImage = document.createElement("img");
+                                        itemImage.src = "/images/" + imageData.frontImage;
+
+                                        const itemPrice = document.createElement("div");
+                                        itemPrice.innerHTML = `<span>&#8377;</span><h1>${car.price}</h1>`;
+
+                                        const itemDescription = document.createElement("p");
+                                        itemDescription.textContent = `${car.year} - ${car.driven} km`;
+
+                                        const itemLocation = document.createElement("div");
+                                        itemLocation.classList.add("foot");
+                                        itemLocation.innerHTML = `<h5>${car.city}</h5><h5>${car.date}</h5>`;
+
+    var deleteButton = document.createElement('input');
+    deleteButton.type = 'button';
+    deleteButton.value = 'Delete';
+    deleteButton.onclick = function() {
+	var product = car.product; // Assuming car.id is the ID of the product
+    var id = car.id; 
+				document.getElementById("deleteModal").style.display = "flex";   
+Delete(product, id);    
+    };
+
+
+                                        itemContainer.appendChild(itemImage);
+                                        itemContainer.appendChild(itemPrice);
+                                        itemContainer.appendChild(itemDescription);
+                                        itemContainer.appendChild(itemLocation);
+itemContainer.appendChild(deleteButton);
+
+                                        dynamicContainer.appendChild(itemContainer);
+                                    },
+                                    error: function(xhr, status, error) {
+                                        console.error("Failed to fetch image:", error);
+                                    }
+                                });
+                            });
+}
+else {
+                                console.error("Cars data is not an array.");
+                            }
+
+                        },
+                        error: function(xhr, status, error) {
+                            console.error("Failed to fetch car data:", error);
+                        }
+                    });
+                },
+                error: function(xhr, status, error) {
+                    console.error("Failed to fetch user data:", error);
+                }
+            });
+
+            $.ajax({
+                url: "/bike/getByEmail",
+                method: "POST",
+                data: {
+                    "email": data
+                },
+                success: function(bikes) {
+  if (Array.isArray(bikes)) {
+
+                    bikes.forEach(function(bike) {
+                        $.ajax({
+                            url: "/image/getImageByBikeId",
+                            method: "GET",
+                            data: {
+                                "bikeId": bike.id
+                            },
+                            success: function(imageData) {
+                                const itemContainer = document.createElement("div");
+                                itemContainer.classList.add("imgContainer");
+
+                                const itemImage = document.createElement("img");
+                                itemImage.src = "/images/" + imageData.frontImage;
+
+                                const itemPrice = document.createElement("div");
+                                itemPrice.innerHTML = `<span>&#8377;</span><h1>${bike.price}</h1>`;
+
+                                const itemDescription = document.createElement("p");
+                                itemDescription.textContent = `${bike.year} - ${bike.driven} km`;
+
+                                const itemLocation = document.createElement("div");
+                                itemLocation.classList.add("foot");
+                                itemLocation.innerHTML = `<h5>${bike.city}</h5><h5>${bike.date}</h5>`;
+			
+    var deleteButton = document.createElement('input');
+    deleteButton.type = 'button';
+    deleteButton.value = 'Delete';
+    deleteButton.onclick = function() {
+	var product = bike.product; // Assuming car.id is the ID of the product
+    var id = bike.id; 
+				document.getElementById("deleteModal").style.display = "flex";   
+Delete(product, id);    
+    };
+
+
+                                        itemContainer.appendChild(itemImage);
+                                        itemContainer.appendChild(itemPrice);
+                                        itemContainer.appendChild(itemDescription);
+                                        itemContainer.appendChild(itemLocation);
+itemContainer.appendChild(deleteButton);
+
+
+                                dynamicContainer.appendChild(itemContainer);
+                            },
+                            error: function(xhr, status, error) {
+                                console.error("Failed to fetch image:", error);
+                            }
+                        });
+                    });
+}
+else {
+                                console.error("Bikes data is not an array.");
+                            }
+
+
+                },
+                error: function(xhr, status, error) {
+                    console.error("Failed to fetch bike data:", error);
+                }
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error("Failed to fetch logged-in user:", error);
+        }
+    });
+});
+
+</script>
+
+
+
+
+
+
+
+
+	</body>
+</html>

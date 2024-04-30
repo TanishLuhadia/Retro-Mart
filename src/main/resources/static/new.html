@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Refine Retro 1</title>
+		<!-- Stylesheets -->
+		<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+		/>
+		<link
+			href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+			rel="stylesheet"
+		/>
+		<!-- Your custom styles -->
+		<link
+			rel="stylesheet"
+			href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+		/>
+
+		<style>
+			* {
+				margin: 0%;
+				padding: 0%;
+				box-sizing: border-box;
+			}
+
+			body,
+			html {
+				height: 100%;
+				width: 100%;
+			}
+
+			/* Nav Styles */
+			nav {
+				height: 10vh;
+				width: 100vw;
+				background-color: #f5eded;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 2vw;
+				border-bottom: 1px solid black;
+			}
+
+			#logo span {
+				color: orangered;
+			}
+
+			nav #list {
+				display: flex;
+				gap: 1.5vw;
+			}
+
+			nav #list a {
+				text-decoration: none;
+				font-weight: 200;
+			}
+
+			nav a {
+				/* padding: 0.5vw 1vw; */
+				color: black;
+				font-size: 1.5vw;
+				border-radius: 50px;
+				padding: 0.5vw;
+			}
+
+			nav a:hover {
+				background-color: black;
+				color: #fff;
+			}
+
+			nav #search input {
+				height: 4.75vh;
+				width: 22vw;
+				border: 0.5px solid darkgrey;
+				padding: 1vw;
+			}
+
+			nav button {
+				height: 2.33vw;
+				width: 2.5vw;
+				position: absolute;
+				border: 1px solid darkgrey;
+				background-color: #fbefef;
+			}
+
+			#sec1 {
+				position: relative;
+				left: -2%;
+				padding-top: 2vw;
+				width: 100vw;
+				display: flex;
+				flex-wrap: wrap;
+				justify-content: space-evenly;
+			}
+
+			.imgContainer {
+				height: 35vw;
+				width: 22vw;
+				border: 1px solid rgb(158, 155, 155);
+				padding: 1vw;
+				border-radius: 10px;
+				margin-bottom: 2vw;
+				background-color: #f5eded;
+			}
+
+			.imgContainer img {
+				height: 70%;
+				width: 100%;
+				object-fit: cover;
+				border-radius: 10px;
+			}
+
+			.imgContainer span {
+				content: "\20B9";
+				font-size: 2.5vw;
+				float: left;
+			}
+
+			#price {
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+			/* Hero Section Styles */
+			#hero {
+				/* background-color: #898686; */
+				min-height: 50vh;
+				width: 100%;
+				padding: 2vw;
+			}
+
+			#hero h1 {
+				font-size: 3vw;
+				color: black;
+			}
+
+			#page2 {
+				width: 100%;
+				/* background-color: #f5eded; */
+				padding: 2vw;
+				margin-top: 2vw; /* Adjust as needed */
+			}
+
+			#page2 h1 {
+				font-size: 3.5vw;
+				position: relative;
+				margin-bottom: 1.6vw;
+				left: 4%;
+			}
+
+			#page2 p {
+				font-size: 1.5vw;
+				color: #9d9b9b;
+				font-family: sans-serif;
+				font-weight: 100;
+				line-height: 2.5vw;
+				padding: 1vw;
+				width: 90%;
+				position: relative;
+				left: 5%;
+			}
+
+			#page2 p span {
+				color: black;
+				font-family: "DM Sans";
+				font-weight: 600;
+			}
+			#page3 {
+				height: 100vh;
+				width: 100vw;
+				margin-top: 5vw;
+			}
+
+			#andar-ka-part {
+				display: flex;
+				position: relative;
+				align-items: center; /*height*/
+				justify-content: center; /* width*/
+				gap: 2vw;
+				position: relative;
+				z-index: 10;
+			}
+
+			.container {
+				height: 70vh;
+				width: 26vw;
+				margin-left: 2vw;
+				border-radius: 20px;
+				background-size: cover;
+				background-position: center;
+				overflow: hidden;
+				transition: all ease 0.6s;
+			}
+
+			#card1 {
+				background-image: url("photo/istockphoto-1473771646-612x612.jpg");
+			}
+
+			#card2 {
+				background-image: url("photo/istockphoto-1471444483-612x612.jpg");
+			}
+
+			#card3 {
+				background-image: url("photo/pexels-photo-4386417.webp");
+			}
+
+			.overlay {
+				height: 100%;
+				width: 100%;
+				background-color: #f5eded;
+				padding: 30px;
+				padding-top: 120px;
+				opacity: 0;
+				transition: all ease 0.6s;
+			}
+
+			.overlay h1 {
+				color: #000;
+				font-size: 25px;
+				text-transform: uppercase;
+				white-space: nowrap; /* ek he line me lane ke liye */
+				margin-bottom: 20px;
+				font-weight: 800;
+			}
+
+			.overlay p {
+				color: #000;
+				font-size: 18px;
+			}
+			.container:hover .overlay {
+				opacity: 1;
+			}
+
+			.footer {
+				background-color: #e3dfdf;
+				color: #000;
+				padding: 20px 0;
+			}
+
+			.footer h2 {
+				position: relative;
+				left: 4%;
+				font-size: 2.2vw;
+			}
+
+			.section h3 {
+				position: relative;
+				left: 4%;
+				font-size: 1.5vw;
+				font-family: serif;
+			}
+
+			.footer a {
+				color: #fff;
+				text-decoration: none;
+				margin: 0 15px;
+			}
+
+			.footer a:hover {
+				text-decoration: underline;
+			}
+
+			.social-icon {
+				font-size: 24px;
+				margin: 0 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="main">
+			<!-- Nav Section -->
+			<nav>
+				<div id="logo">
+					<h1>Refine <span>Retro</span></h1>
+				</div>
+				<div id="list">
+					<a href="#">Home</a>
+					<a href="#">Categories</a>
+					<a href="#">About Us</a>
+					<a href="#">Contact Us</a>
+				</div>
+				<div id="search">
+					<input
+						type="text"
+						placeholder="Find Cars, Mobile Phones and more..."
+					/>
+					<button id="navBtn">
+						<i class="ri-search-2-line"></i>
+					</button>
+				</div>
+				<a href="login.html">Sell</a>
+			</nav>
+
+			<!-- Hero Section -->
+			<div id="hero">
+				<h1>Fresh Recommendations...</h1>
+				<div id="sec1">
+					<div class="imgContainer" id="pd1">
+						<img
+							src="Products/istockphoto-1015844794-612x612.jpg"
+							alt=""
+						/>
+						<div id="price">
+							<span>&#8377;</span>
+							<h1>60,000</h1>
+						</div>
+						<p>2018 - 20000 km</p>
+						<div id="foot">
+							<h5>Hoshangabad</h5>
+							<h5>Jan 07</h5>
+						</div>
+					</div>
+
+					<div class="imgContainer" id="pd1">
+						<img
+							src="Products/istockphoto-1015844794-612x612.jpg"
+							alt=""
+						/>
+						<div id="price">
+							<span>&#8377;</span>
+							<h1>60,000</h1>
+						</div>
+						<p>2018 - 20000 km</p>
+						<div id="foot">
+							<h5>Hoshangabad</h5>
+							<h5>Jan 07</h5>
+						</div>
+					</div>
+
+					<div class="imgContainer" id="pd1">
+						<img
+							src="Products/istockphoto-1015844794-612x612.jpg"
+							alt=""
+						/>
+						<div id="price">
+							<span>&#8377;</span>
+							<h1>60,000</h1>
+						</div>
+						<p>2018 - 20000 km</p>
+						<div id="foot">
+							<h5>Hoshangabad</h5>
+							<h5>Jan 07</h5>
+						</div>
+					</div>
+					<div class="imgContainer" id="pd1">
+						<img
+							src="Products/istockphoto-1015844794-612x612.jpg"
+							alt=""
+						/>
+						<div id="price">
+							<span>&#8377;</span>
+							<h1>60,000</h1>
+						</div>
+						<p>2018 - 20000 km</p>
+						<div id="foot">
+							<h5>Hoshangabad</h5>
+							<h5>Jan 07</h5>
+						</div>
+					</div>
+					<div class="imgContainer" id="pd1">
+						<img
+							src="Products/istockphoto-1015844794-612x612.jpg"
+							alt=""
+						/>
+						<div id="price">
+							<span>&#8377;</span>
+							<h1>60,000</h1>
+						</div>
+						<p>2018 - 20000 km</p>
+						<div id="foot">
+							<h5>Hoshangabad</h5>
+							<h5>Jan 07</h5>
+						</div>
+					</div>
+
+					<!-- Fresh recommendations will be dynamically populated here -->
+				</div>
+			</div>
+
+			<!-- Our Services Section -->
+			<div id="page2">
+				<h1>Our Services...</h1>
+				<p>
+					Welcome to <span>Retro Mart!</span> We offer a comprehensive
+					range of services designed to make buying and selling
+					pre-owned items easy and secure for our users. For sellers,
+					we provide an easy-to-use platform where you can list your
+					pre-owned items and reach a wide audience of potential
+					buyers. Our advanced encryption technology ensures secure
+					transactions, giving you peace of mind while conducting
+					business on our platform. We maintain high standards of
+					quality for all listings through our rigorous verification
+					process, ensuring that buyers receive authentic and
+					accurately described items. Our intelligent recommendation
+					system helps buyers discover items that match their
+					interests, enhancing the shopping experience. Additionally,
+					our dedicated customer support team is available 24/7 to
+					assist you with any inquiries, ensuring a smooth and
+					hassle-free experience for both buyers and sellers. We also
+					offer flexible payment options to cater to your convenience,
+					allowing you to complete transactions seamlessly. Join our
+					community today and experience the convenience and security
+					of Refine Retro!
+				</p>
+			</div>
+
+			<div id="page3">
+				<h1></h1>
+				<div id="andar-ka-part">
+					<div class="container" id="card1">
+						<div class="overlay">
+							<h1>Fraud Free Shopping</h1>
+							<p>
+								Shop with confidence knowing that you'll never
+								experience fraud on our platform. Our rigorous
+								verification process guarantees a secure and
+								trustworthy shopping experience.
+							</p>
+						</div>
+					</div>
+					<div class="container" id="card2">
+						<div class="overlay">
+							<h1>Quality Assurance</h1>
+							<p>
+								We are committed to offering you the best
+								quality products from reputable sellers. With
+								Retro Mart, you can rest assured that you'll
+								find the best quality items on our platform.
+							</p>
+						</div>
+					</div>
+					<div class="container" id="card3">
+						<div class="overlay">
+							<h1>Your Money is safe</h1>
+							<p>
+								At Retro Mart, your money is safe with us.
+								Utilize our unique "See Before You Pay" feature
+								to inspect the product physically before making
+								a payment, ensuring complete satisfaction.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer>
+				<div class="footer">
+					<h2>Retro Mart</h2>
+
+					<div class="section">
+						<h3>About Us</h3>
+						<p>
+							Retro Mart is your one-stop destination for vintage
+							and unique items. We strive to connect buyers and
+							sellers in a trusted and secure online marketplace.
+						</p>
+					</div>
+
+					<div class="section">
+						<h3>Contact Us</h3>
+						<p>
+							Email:
+							<a href="mailto:contact@retromart.com"
+								>contact@retromart.com</a
+							>
+						</p>
+						<p>Phone: +91-XXXXXXXXXX</p>
+					</div>
+
+					<div class="section">
+						<h3>Follow Us</h3>
+						<p>
+							<a href="#" class="social-icon"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a href="#" class="social-icon"
+								><i class="fab fa-twitter"></i
+							></a>
+							<a href="#" class="social-icon"
+								><i class="fab fa-instagram"></i
+							></a>
+						</p>
+					</div>
+
+					<div class="section">
+						<h3>Terms and Conditions</h3>
+						<p>
+							All rights reserved. Use of this website constitutes
+							acceptance of our
+							<a href="#">Terms and Conditions</a>.
+						</p>
+					</div>
+				</div>
+			</footer>
+		</div>
+
+		<!-- JavaScript Libraries -->
+		<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+		<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+		<!-- Your custom scripts -->
+		<script>
+			// Your JavaScript code here
+			document.addEventListener("DOMContentLoaded", () => {
+				// Function to set the top position of the "Our Services" section dynamically
+				function setServicesSectionPosition() {
+					const sec1Height =
+						document.getElementById("sec1").offsetHeight; // Get the height of sec1
+					const servicesSection = document.getElementById("page2");
+					const topPosition = sec1Height + 20; // Add an offset if needed
+
+					servicesSection.style.top = `${topPosition}px`; // Set the top position dynamically
+				}
+
+				// Call the function when the DOM content is loaded and when product listings are dynamically added
+				setServicesSectionPosition();
+				window.addEventListener("resize", setServicesSectionPosition);
+			});
+
+			const scroll = new LocomotiveScroll({
+				el: document.querySelector("#main"),
+				smooth: true,
+			});
+
+			const navBtn = document.querySelector("#navBtn");
+
+			let i = 0;
+			navBtn.addEventListener("click", function () {
+				if (i == 0) {
+					navBtn.style.border = "1px solid black";
+					i = 1;
+				} else {
+					navBtn.style.border = "1px solid darkgrey";
+					i = 0;
+				}
+			});
+
+			// Load more button functionality
+			const loadMoreBtn = document.getElementById("loadMore");
+			let page = 2; // Initial page number
+
+			loadMoreBtn.addEventListener("click", function () {
+				// Call function to fetch and render additional product listings
+				fetchAndRenderProductListings(page);
+				page++; // Increment page number for next fetch
+			});
+
+			// Function to fetch and render product listings
+			function fetchAndRenderProductListings(page) {
+				fetch(`/car/getAll?page=${page}&limit=10`) // Assuming API supports pagination
+					.then((response) => response.json())
+					.then((data) => {
+						// Render fetched product listings
+						data.forEach((car) => {
+							const {
+								id,
+								price,
+								location,
+								addedDate,
+								userEmail,
+							} = car;
+							// Fetch user details based on userEmail
+							fetch(`/user/getUser/${userEmail}`)
+								.then((response) => response.json())
+								.then((user) => {
+									const { name, profilePic } = user;
+									// Fetch images for the car
+									fetch(`/image/getAll/${id}`)
+										.then((response) => response.json())
+										.then((images) => {
+											const firstImage = images[0];
+											// Render the car listing on the page
+											renderCarListing(
+												firstImage,
+												price,
+												location,
+												addedDate,
+												name,
+												profilePic
+											);
+										});
+								});
+						});
+					})
+					.catch((error) =>
+						console.error("Error fetching product listings:", error)
+					);
+			}
+
+			// Function to render each car listing
+			function renderCarListing(
+				image,
+				price,
+				location,
+				addedDate,
+				userName,
+				userImage
+			) {
+				// Create HTML elements to display the listing
+				const listingContainer = document.createElement("div");
+				listingContainer.classList.add("imgContainer");
+
+				const listingImage = document.createElement("img");
+				listingImage.src = image.url; // Assuming image.url contains the URL of the image
+				listingImage.alt = "Car Image";
+
+				const priceElement = document.createElement("div");
+				priceElement.innerHTML = `<span>&#8377;</span><h1>${price}</h1>`;
+
+				const locationElement = document.createElement("p");
+				locationElement.textContent = location;
+
+				const addedDateElement = document.createElement("div");
+				addedDateElement.textContent = addedDate;
+
+				// Append elements to the listing container
+				listingContainer.appendChild(listingImage);
+				listingContainer.appendChild(priceElement);
+				listingContainer.appendChild(locationElement);
+				listingContainer.appendChild(addedDateElement);
+
+				// Append the listing container to the page
+				document
+					.getElementById("productListings")
+					.appendChild(listingContainer);
+			}
+
+			// Call the function to fetch and render product listings
+			fetchAndRenderProductListings();
+
+			document.addEventListener("DOMContentLoaded", () => {
+				// Function to fetch and render fresh recommendations
+				function fetchAndRenderFreshRecommendations() {
+					// Replace this with your actual API endpoint to fetch fresh recommendations
+					fetch("/api/getFreshRecommendations")
+						.then((response) => response.json())
+						.then((data) => {
+							const sec1 = document.getElementById("sec1");
+							// Clear any existing content in sec1
+							sec1.innerHTML = "";
+							// Render fresh recommendations
+							data.forEach((item) => {
+								const itemDiv = document.createElement("div");
+								itemDiv.textContent = item.name; // Example: Render item name
+								sec1.appendChild(itemDiv);
+							});
+						})
+						.catch((error) =>
+							console.error(
+								"Error fetching fresh recommendations:",
+								error
+							)
+						);
+				}
+
+				// Fetch and render fresh recommendations on page load
+				fetchAndRenderFreshRecommendations();
+
+				// You can add more JavaScript code here as needed
+			});
+		</script>
+	</body>
+</html>

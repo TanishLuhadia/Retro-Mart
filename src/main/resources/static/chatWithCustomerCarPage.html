@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mobile Number Verification</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Custom CSS for styling */
+    body {
+      background-color: #f8f9fa;
+    }
+    .container {
+      margin-top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header bg-primary text-white">
+            <h4>Mobile Number Verification</h4>
+          </div>
+          <div class="card-body">
+            <form id="verificationForm">
+              <div class="form-group">
+                <label for="mobileNumber">Enter Mobile Number:</label>
+                <input type="text" class="form-control" id="mobileNumber" name="mobileNumber" placeholder="Enter your mobile number" required>
+              </div>
+              <button id='button1' type="submit" class="btn btn-primary btn-block">Verify</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      // Handle form submission
+      $('#verificationForm').submit(function(event) {
+        event.preventDefault(); // Prevent the form from submitting normally
+
+        // Get the mobile number input value
+        var mobileNumber = $('#mobileNumber').val();
+
+        // Regular expression for basic mobile number validation (10 digits)
+  var mobileRegex = /^\+\d{12}$/;
+
+
+
+        // Check if the mobile number matches the regular expression
+        if (!mobileRegex.test(mobileNumber)) {
+          // If the mobile number is not valid, display an error message
+          alert("Please enter a valid 10-digit mobile number with country code.");
+          return; // Exit the function if the mobile number is invalid
+        }
+$("#button1").prop("disabled",true);
+ 
+  var formData = {
+         number: mobileNumber
+        };
+
+        
+
+$.ajax({
+    url: "/sendOTPBuyer",
+    method: "GET",
+    data: formData,
+    success: function(data) {
+          if (data.status === "DELIVERED") {
+            window.location.href = '/otpBuyer'; // Redirect to OTP verification page
+          } else {
+$("#button1").prop("disabled", false);
+ 
+            alert("Failed to send OTP. Please try again later.");
+          }
+    },
+    error: function(xhr, status, error) {
+        // Handle error
+    }
+});
+
+
+            });
+    });
+  </script>
+</body>
+</html>

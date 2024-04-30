@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Refine Retro 1</title>
+		<!-- Stylesheets -->
+		<!-- Stylesheets -->
+<link
+			rel="stylesheet"
+			href="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.css"
+		/>
+
+		<link
+			href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css"
+			rel="stylesheet"
+		/>
+		<!-- <link rel="stylesheet" href="style.css" /> -->
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/locomotive-scroll@3.5.4/dist/locomotive-scroll.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <!-- ... (Your other scripts) ... -->
+    <!-- Your custom scripts -->
+
+		<!-- Your custom styles -->
+		<style>
+			* {
+				margin: 0%;
+				padding: 0%;
+				box-sizing: border-box;
+			}
+
+			body,
+			html {
+				height: 100%;
+				width: 100%;
+			}
+
+			/* Nav Styles */
+			nav {
+				height: 10vh;
+				width: 100vw;
+				background-color: #f5eded;
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				padding: 2vw;
+				border-bottom: 1px solid black;
+			}
+
+			#logo span {
+				color: orangered;
+			}
+
+			nav #list {
+				display: flex;
+				gap: 1.5vw;
+			}
+
+			nav #list a {
+				text-decoration: none;
+				font-weight: 200;
+			}
+
+			nav a {
+				/* padding: 0.5vw 1vw; */
+				color: black;
+				font-size: 1.5vw;
+				border-radius: 50px;
+				padding: 0.5vw;
+			}
+
+			nav a:hover {
+				background-color: black;
+				color: #fff;
+			}
+
+			nav #search input {
+				height: 4.75vh;
+				width: 22vw;
+				border: 0.5px solid darkgrey;
+				padding: 1vw;
+			}
+
+			nav button {
+				height: 2.33vw;
+				width: 2.5vw;
+				position: absolute;
+				border: 1px solid darkgrey;
+				background-color: #fbefef;
+			}
+
+			#sec1 {
+				position: relative;
+    			left: -2%;
+    			padding-top: 2vw;
+    			width: 100vw;
+    			display: flex;
+    			flex-wrap: wrap;
+    			justify-content: space-evenly;
+			}
+
+			
+ .imgContainer {
+        height: 32vw;
+        width: 22vw;
+        border: 1px solid rgb(158, 155, 155);
+        padding: 1vw;
+        border-radius: 10px;
+        margin-bottom: 2vw;
+        background-color: #f5eded;
+        transition: all 0.3s ease; /* Smooth transition for all properties */
+    }
+
+    .imgContainer:hover {
+        transform: scale(1.05); /* Scale up the container on hover */
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Add shadow on hover */
+        border-color: red; /* Change border color on hover */
+    }
+
+			.imgContainer img {
+				height: 70%;
+				width: 100%;
+				object-fit: cover;
+				border-radius: 10px;
+			}
+
+
+			.imgContainer span {
+				content: "\20B9";
+				font-size: 2.5vw;
+				float: left;
+			}
+
+			#price {
+				text-align: center;
+				display: flex;
+				align-items: center;
+				justify-content: flex-start;
+			}
+
+					#hero {
+				/* background-color: #898686; */
+				min-height: 50vh;
+				width: 100%;
+				padding: 2vw;
+			}
+
+			#hero h1 {
+				font-size: 3vw;
+				color: black;
+			}
+
+			#page2 {
+				width: 100%;
+				/* background-color: #f5eded; */
+				padding: 2vw;
+				margin-top: 2vw; /* Adjust as needed */
+			}
+
+			#page2 h1 {
+				font-size: 3.5vw;
+				position: relative;
+				margin-bottom: 1.6vw;
+				left: 4%;
+			}
+
+			#page2 p {
+				font-size: 1.5vw;
+				color: #9d9b9b;
+				font-family: sans-serif;
+				font-weight: 100;
+				line-height: 2.5vw;
+				padding: 1vw;
+				width: 90%;
+				position: relative;
+				left: 5%;
+			}
+
+			#page2 p span {
+				color: black;
+				font-family: "DM Sans";
+				font-weight: 600;
+			}
+			#page3 {
+				height: 100vh;
+				width: 100vw;
+				margin-top: 5vw;
+			}
+
+			#andar-ka-part {
+				display: flex;
+				position: relative;
+				align-items: center; /*height*/
+				justify-content: center; /* width*/
+				gap: 2vw;
+				position: relative;
+				z-index: 10;
+			}
+
+			.container {
+				height: 70vh;
+				width: 26vw;
+				margin-left: 2vw;
+				border-radius: 20px;
+				background-size: cover;
+				background-position: center;
+				overflow: hidden;
+				transition: all ease 0.6s;
+			}
+
+			#card1 {
+				background-image: url("/istockphoto-1473771646-612x612.jpg");
+			}
+
+			#card2 {
+				background-image: url("/istockphoto-1471444483-612x612.jpg");
+			}
+
+			#card3 {
+				background-image: url("/pexels-photo-4386417.webp");
+			}
+
+			.overlay {
+				height: 100%;
+				width: 100%;
+				background-color: #f5eded;
+				padding: 30px;
+				padding-top: 120px;
+				opacity: 0;
+				transition: all ease 0.6s;
+			}
+
+			.overlay h1 {
+				color: #000;
+				font-size: 25px;
+				text-transform: uppercase;
+				white-space: nowrap; /* ek he line me lane ke liye */
+				margin-bottom: 20px;
+				font-weight: 800;
+			}
+
+			.overlay p {
+				color: #000;
+				font-size: 18px;
+			}
+			.container:hover .overlay {
+				opacity: 1;
+			}
+
+			.footer {
+				background-color: #e3dfdf;
+				color: #000;
+				padding: 20px 0;
+			}
+
+			.footer h2 {
+				position: relative;
+				left: 4%;
+				font-size: 2.2vw;
+			}
+
+			.section h3,p {
+				position: relative;
+				left: 4%;
+				font-size: 1.5vw;
+				font-family: serif;
+			}
+
+			.footer a {
+				text-decoration: none;
+				margin: 0 15px;
+			}
+
+			.footer a:hover {
+				text-decoration: underline;
+			}
+
+			.social-icon {
+				font-size: 24px;
+				margin: 0 10px;
+			}
+#profilePhoto {
+    width: 50px; /* Specify the desired width */
+    height: 50px; /* Specify the desired height */
+    border-radius: 50%; /* Ensure the image is circular */
+    object-fit: cover; /* Maintain aspect ratio and cover entire area */
+}
+
+		</style>
+<script>
+
+window.addEventListener("load", () => {
+
+    const handleHover = (event) => {
+        event.target.classList.toggle("hovered");
+    };
+
+    const handleClick = (event, data) => {
+        const email = data.email;
+        $.ajax({
+            url: "/showMoreDetail",
+            method: "POST",
+            data: {
+                id: data.id,
+                email: data.email,
+                product: data.product
+            },
+            success: function (response) {
+                if (response.successful == false) {
+                    window.location.href = "/loginForPurchase.html";
+                } else {
+                    $.ajax({
+                        url: "/addDetails",
+                        method: "POST",
+                        data: {
+                            id: data.id,
+                            email: data.email,
+                            product: data.product
+                        },
+                        success: function (response) {
+                            window.location.href = '/showDetails';
+                        },
+                        error: function (xhr, status, error) {
+                            console.error("Error:", error);
+                        }
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                console.error("Error:", error);
+            }
+        });
+    };
+
+    const navBtn = document.querySelector("#navBtn");
+
+    let i = 0;
+    navBtn.addEventListener("click", function () {
+        if (i == 0) {
+            navBtn.style.border = "1px solid black";
+            i = 1;
+        } else {
+            navBtn.style.border = "1px solid darkgrey";
+            i = 0;
+        }
+    });
+
+    const loadData = (url) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: url,
+                method: "GET",
+                success: function (data) {
+                    resolve(data);
+                },
+                error: function (xhr, status, error) {
+                    reject(error);
+                },
+            });
+        });
+    };
+
+    const loadImageData = (url, id) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: url,
+                method: "GET",
+                data: { 
+                    // For bikes, use 'bikeId'; for cars, use 'carId'
+                    bikeId: id,
+                    carId: id
+                },
+                success: function (userData) {
+                    resolve(userData.frontImage);
+                },
+                error: function (xhr, status, error) {
+                    reject(error);
+                },
+            });
+        });
+    };
+
+    const loadUserData = (url, email) => {
+        return new Promise((resolve, reject) => {
+            $.ajax({
+                url: url,
+                method: "GET",
+                data: { email: email },
+                success: function (userData) {
+                    resolve(userData.firstName);
+                },
+                error: function (xhr, status, error) {
+                    reject(error);
+                },
+            });
+        });
+    };
+
+    const dynamicContainer = document.getElementById("sec1");
+
+    const loadProductData = (productType) => {
+        const url = productType === 'car' ? "/car/getAll" : "/bike/getAll";
+        const imageEndpoint = productType === 'car' ? "/image/getImageByCarId" : "/image/getImageByBikeId";
+
+        loadData(url)
+            .then((data) => {
+                const promises = [];
+                for (let i = 0; i < data.length; i++) {
+                    const id = data[i].id;
+                    const email = data[i].email;
+                    promises.push(
+                        loadImageData(imageEndpoint, id)
+                            .then((frontImage) => {
+                                return loadUserData("/user/getUser", email)
+                                    .then((firstName) => {
+                                        return {
+                                            frontImage: frontImage,
+                                            firstName: firstName,
+                                            data: data[i]
+                                        };
+                                    });
+                            })
+                    );
+                }
+                return Promise.all(promises);
+            })
+            .then((results) => {
+                results.forEach(({ frontImage, firstName, data }) => {
+                    const itemContainer = document.createElement("div");
+                    itemContainer.classList.add("imgContainer");
+
+                    const itemImage = document.createElement("img");
+                    itemImage.src = "/images/" + frontImage;
+
+                    const itemPrice = document.createElement("div");
+                    itemPrice.innerHTML = `<span>&#8377;</span><h1>${data.price}</h1>`;
+
+                    const itemDescription = document.createElement("p");
+                    itemDescription.textContent = `${data.year} - ${data.driven} km`;
+
+                    const itemLocation = document.createElement("div");
+                    itemLocation.classList.add("foot");
+                    itemLocation.innerHTML = `<h5>${data.city}</h5><h5>${data.date}</h5>`;
+
+                    itemContainer.appendChild(itemImage);
+                    itemContainer.appendChild(itemPrice);
+                    itemContainer.appendChild(itemDescription);
+                    itemContainer.appendChild(itemLocation);
+
+                    // Attach event listeners
+                    itemContainer.addEventListener("mouseenter", handleHover);
+                    itemContainer.addEventListener("mouseleave", handleHover);
+                    itemContainer.addEventListener("click", (event) => handleClick(event, data));
+
+                    dynamicContainer.appendChild(itemContainer);
+                });
+            })
+            .catch((error) => console.error("Error: ", error));
+    };
+
+    // Load car data
+    loadProductData('car');
+    // Load bike data
+    loadProductData('bike');
+
+
+
+
+ $.ajax({
+        url: "/getLoggedInUser",
+        method: "GET",
+        success: function(data) {
+
+
+$.ajax({
+                                url: "/getProfile",
+                                method: "POST",
+                                data: {
+                                    "email": data
+                                },
+                                success: function(dataaa) {
+                                    if (dataaa.successful == true) {
+ $("#profilePhoto").attr("src", "/images/" + dataaa.result);                                   
+ } 
+else {
+ $("#profilePhoto").attr("src", "/" + dataaa.result);                                    
+}
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error("Failed to fetch image:", error);
+                                    alert("Error uploading image. Please try again later.");
+                                }
+                            });
+
+
+            
+},
+
+ error: function (xhr, status, error) {
+                    reject(error);
+                }
+            });
+
+
+
+
+
+
+
+
+});
+
+</script>
+
+	</head>
+	<body>
+		<div id="main">
+			<!-- Nav Section -->
+			<nav>
+				<div id="logo">
+					<h1>Refine <span>Retro</span></h1>
+				</div>
+				<div id="list">
+					<a href="#">Home</a>
+					<a href="#">Categories</a>
+					<a href="#">About Us</a>
+					<a href="#">Contact Us</a>
+				</div>
+				<div id="search">
+					<input
+						type="text"
+						placeholder="Find Cars, Mobile Phones and more..."
+					/>
+					<button id="navBtn">
+						<i class="ri-search-2-line"></i>
+					</button>
+				</div>
+				<a href="/login">Sell</a>
+ <a href="/newprofile" class="profile-link">
+    <img id="profilePhoto" src="" alt="User Photo">
+</a>
+
+			</nav>
+
+			<!-- Hero Section -->
+			<div id="hero">
+				<h1>Fresh Recommendations...</h1>
+				<div id="sec1">
+
+
+					<!-- Fresh recommendations will be dynamically populated here -->
+				</div>
+			</div>
+
+			<!-- Our Services Section -->
+			<div id="page2">
+				<h1>Our Services...</h1>
+				<p>
+					Welcome to <span>Refine Retro</span>, your go-to destination
+					for buying and selling pre-owned items! Whether you're
+					looking to declutter your home or find great deals on gently
+					used products, our platform connects buyers and sellers
+					seamlessly. Browse through a diverse range of listings, from
+					electronics and furniture to clothing and accessories.
+					Sellers can easily post their items, while buyers can find
+					what they need at unbeatable prices. Join our community
+					today and turn your unused items into cash or score amazing
+					finds!
+				</p>
+			</div>
+
+		<div id="page3">
+				<h1></h1>
+				<div id="andar-ka-part">
+					<div class="container" id="card1">
+						<div class="overlay">
+							<h1>Fraud Free Shopping</h1>
+							<p>
+								Shop with confidence knowing that you'll never
+								experience fraud on our platform. Our rigorous
+								verification process guarantees a secure and
+								trustworthy shopping experience.
+							</p>
+						</div>
+					</div>
+					<div class="container" id="card2">
+						<div class="overlay">
+							<h1>Quality Assurance</h1>
+							<p>
+								We are committed to offering you the best
+								quality products from reputable sellers. With
+								Retro Mart, you can rest assured that you'll
+								find the best quality items on our platform.
+							</p>
+						</div>
+					</div>
+					<div class="container" id="card3">
+						<div class="overlay">
+							<h1>Your Money is safe</h1>
+							<p>
+								At Retro Mart, your money is safe with us.
+								Utilize our unique "See Before You Pay" feature
+								to inspect the product physically before making
+								a payment, ensuring complete satisfaction.
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<footer>
+				<div class="footer">
+					<h2>Retro Mart</h2>
+
+					<div class="section">
+						<h3>About Us</h3>
+						<p>
+							Retro Mart is your one-stop destination for vintage
+							and unique items. We strive to connect buyers and
+							sellers in a trusted and secure online marketplace.
+						</p>
+					</div>
+
+					<div class="section">
+						<h3>Contact Us</h3>
+						<p>
+							Email:
+							<a href="mailto:contact@retromart.com"
+								>tanishjain5801@gmail.com</a
+							>
+						</p>
+						<p>Phone: +91-XXXXX55680</p>
+					</div>
+
+					<div class="section">
+						<h3>Follow Us</h3>
+						<p>
+							<a href="#" class="social-icon"
+								><i class="fab fa-facebook-f"></i
+							></a>
+							<a href="#" class="social-icon"
+								><i class="fab fa-twitter"></i
+							></a>
+							<a href="#" class="social-icon"
+								><i class="fab fa-instagram"></i
+							></a>
+						</p>
+					</div>
+
+					<div class="section">
+						<h3>Terms and Conditions</h3>
+						<p>
+							All rights reserved. Use of this website constitutes
+							acceptance of our
+							<a href="#">Terms and Conditions</a>.
+						</p>
+					</div>
+				</div>
+			</footer>
+</div>
+	</body>
+</html>

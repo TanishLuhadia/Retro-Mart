@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Document</title>
+		<link rel="stylesheet" href="style.css" />
+<style>
+label.error 
+{
+            color: red; /* Change the color as needed */
+            font-size: 14px; /* Adjust the font size as needed */
+}
+</style>
+	</head>
+	<body>
+		<div id="main">
+			<header>
+				<h1>POST YOUR AD</h1>
+			</header>
+
+			<fieldset>
+				<form action="/sendOTP" method="get" id="adForm">
+					<label for="brands">Brand *</label><br />
+					<select
+						class="hero"
+						id="brand"
+						name="brand"
+						onchange="showModels()"
+					>
+						<option value=""></option>
+						<option value="Maruti Suzuki">Maruti Suzuki</option>
+						<option value="Hyundai">Hyundai</option>
+						<option value="Tata">Tata</option>
+						<option value="Honda">Honda</option>
+					</select>
+
+					<label for="models" id="models-label" style="display: none"
+						>Model *</label
+					>
+					<select
+						class="hero"
+						id="model"
+						name="model"
+						style="display: none"
+						onchange="showVariants()"
+					>
+						<option value="">Select</option>
+					</select>
+
+					<label
+						for="variants"
+						id="variants-label"
+						style="display: none"
+						>Variant *</label
+					>
+					<select
+						class="hero"
+						id="varient"
+						name="varient"
+						style="display: none"
+					>
+						<option value="">Select</option>
+					</select>
+
+					<br />
+					<label for="year">Year * (Min 1900)</label><br />
+					<input
+						class="hero"
+						type="number"
+						id="year"
+						name="year"
+						required
+						min="1900"
+					/>
+					<span id="year-error" style="color: red"></span>
+
+					<br />
+					<label for="fuel">Fuel *</label>
+					<div class="fuel">
+						<button
+							type="button"
+							id="fuel-cng"
+							class="chota-hero"
+							onclick="selectFuel(event, 'CNG & Hybrids')"
+						>
+							CNG & Hybrids
+						</button>
+						<button
+							type="button"
+							id="fuel-diesel"
+							class="chota-hero"
+							onclick="selectFuel(event, 'Diesel')"
+						>
+							Diesel
+						</button>
+						<button
+							type="button"
+							id="fuel-electric"
+							class="chota-hero"
+							onclick="selectFuel(event, 'Electric')"
+						>
+							Electric
+						</button>
+						<button
+							type="button"
+							id="fuel-lpg"
+							class="chota-hero"
+							onclick="selectFuel(event, 'LPG')"
+						>
+							LPG
+						</button>
+						<button
+							type="button"
+							id="fuel-petrol"
+							class="chota-hero"
+							onclick="selectFuel(event, 'Petrol')"
+						>
+							Petrol
+						</button>
+					</div>
+
+					<br />
+					<label for="transmission">Transmission *</label>
+					<div id="transmission-button" class="fuel">
+						<button
+							type="button"
+							id="transmission-manual"
+							class="chota-hero"
+							onclick="selectTransmission(event, 'Manual')"
+						>
+							Manual
+						</button>
+						<button
+							type="button"
+							id="transmission-automatic"
+							class="chota-hero"
+							onclick="selectTransmission(event, 'Automatic')"
+						>
+							Automatic
+						</button>
+					</div>
+
+					<br />
+					<label for="KMdriven">KM driven * (Max 6 digits)</label>
+					<br />
+					<input
+						class="hero"
+						type="number"
+						id="driven"
+						name="driven"
+						required
+						maxlength="6"
+					/>
+					<span id="km-error" style="color: red"></span>
+
+					<br />
+					<label for="owners">No. of Owners *</label>
+					<div class="fuel" id="owners-buttons">
+						<button
+							type="button"
+							id="owner-1st"
+							class="chota-hero"
+							onclick="selectOwners(event, '1st')"
+						>
+							1st
+						</button>
+						<button
+							type="button"
+							id="owner-2nd"
+							class="chota-hero"
+							onclick="selectOwners(event, '2nd')"
+						>
+							2nd
+						</button>
+						<button
+							type="button"
+							id="owner-3rd"
+							class="chota-hero"
+							onclick="selectOwners(event, '3rd')"
+						>
+							3rd
+						</button>
+						<button
+							type="button"
+							id="owner-4th"
+							class="chota-hero"
+							onclick="selectOwners(event, '4th')"
+						>
+							4th
+						</button>
+						<button
+							type="button"
+							id="owner-4plus"
+							class="chota-hero"
+							onclick="selectOwners(event, '4+')"
+						>
+							4+
+						</button>
+					</div>
+
+					<br />
+					<label for="title">Add Title * (Max 70 characters)</label>
+					<br />
+					<input
+						type="text"
+						class="hero"
+						id="conditions"
+						name="conditions"
+						maxlength="70"
+					/>
+					<span id="title-error" style="color: red"></span>
+
+					<br />
+					<label for="description"
+						>Description * (Max 5000 characters)</label
+					>
+					<br />
+					<textarea
+						name="features"
+						id="features"
+						placeholder="Type something here..."
+						maxlength="5000"
+					></textarea>
+					<span id="description-error" style="color: red"></span>
+					<br /><br />
+
+					<label for="country-state" id="country-state-label"
+						>State *</label
+					><br />
+					<select
+						class="hero"
+						id="state"
+						name="state"
+					>
+						<option value="">State</option>
+											
+					</select>
+					<br />
+
+					<label for="city" id="city-label">City *</label><br />
+					<select class="hero" id="city" name="city">
+<option value="">City</option>
+</select>
+
+					<br />
+					<h2>SET A PRICE</h2>
+					<label for="price">Price *</label><br />
+					<input type="number" class="hero" id="price" name="price" />
+					<br /><br />
+
+					<label for="mobile">Mobile Number *</label><br />
+					<input type="tel" class="hero" id="contactNumber" name="contactNumber" />
+<span id="invalidSpan"></span>
+					<!-- The hidden input field -->
+					<input
+						type="hidden"
+						id="fuel"
+						name="fuel"
+					/>
+					<input
+						type="hidden"
+						id="transmission"
+						name="transmission"
+					/>
+					<input
+						type="hidden"
+						id="numberOfOwner"
+						name="numberOfOwner"
+					/><br>
+<button type='submit' id='button1' >Validate</button>
+				</form>
+			</fieldset>
+		</div>
+		<script src="script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <!-- Bootstrap JS -->
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- jQuery Validate -->
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+
+
+
+
+
+<script>
+let auth_token;
+    $(document).ready(() => {
+        // ... Your existing functions ...
+
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/getaccesstoken",
+success:function(data){
+auth_token=data.auth_token;
+getCountry(data.auth_token);
+},
+error:function(error){
+alert('error');
+},
+headers:{
+ "Accept": "application/json",
+    "api-token": "qGD-9FN6UzIW5LLLMUjFGVnr8gcaVptGZQGj0B80NEZDIC0ltbnk06SUZYNAkzibYmo",
+    "user-email": "tanishjain7566669375@gmail.com"
+
+}
+});
+$("#state").change(function(){
+getCity();
+});
+
+
+
+
+            $("#adForm").validate({
+                rules: {
+                    brand: {
+                        required: true
+                                          },
+                    model: {
+                        required: true
+                    },
+
+                  varient: {
+                        required: true
+                    },
+year: {
+                        required: true
+                    },
+
+fuel: {
+                        required: true
+                    },
+                    transmission: {
+                        required: true
+                    },
+                   driven: {
+                        required: true
+                    },
+numberOfOwner: {
+                        required: true
+                    },
+conditions: {
+                        required: true
+                    },
+ features: {
+                        required: true
+                    },
+state: {
+                        required: true
+                    },
+city: {
+                        required: true
+                    },
+price: {
+                        required: true
+                    },
+contactNumber: {
+                        required: true
+                    }
+
+
+
+
+
+
+
+
+
+                },
+                messages: {
+                    
+                    brand: {
+                        required: "Please enter Brand"
+                    },
+                    model: {
+                        required: "Please enter Model"
+                    },               
+
+                   varient: {
+                        required: "Please enter Varient"
+                    },               
+                    year: {
+                        required: "Please enter year"
+                    },               
+                    fuel: {
+                        required: "Please enter fuel"
+                    },               
+                    transmission: {
+                        required: "Please enter transmission"
+                    },               
+                    driven: {
+                        required: "Please enter driven"
+                    },               
+                    numberOfOwner: {
+                        required: "Please enter Number of owner"
+                    },               
+                    conditions: {
+                        required: "Please enter Conditions"
+                    },               
+                    features: {
+                        required: "Please enter Features"
+                    },               
+                    model: {
+                        required: "Please enter Model"
+                    },               
+                    state: {
+                        required: "Please enter State"
+                    },               
+                    city: {
+                        required: "Please enter city"
+                    },               
+                    price: {
+                        required: "Please enter Price"
+                    },               
+
+contactNumber: {
+                        required: "Please enter Contact number"
+                    }               
+
+
+
+
+
+
+
+
+
+
+
+},
+                 submitHandler: function (event) {
+ $("#button1").prop("disabled", true);
+
+
+            // Serialize form data
+
+            var formData = $("#adForm").serialize();
+
+            // Perform AJAX post request to the server
+            $.get("/sendOTP", formData, function (data) {
+                // Handle the server response here
+ $("#button1").prop("disabled", false);
+                if (data.status === "DELIVERED") {
+                    window.location.href = '/otp';
+                } else {
+                    $("#invalidSpan").text("Please enter valid phone number");
+                }
+            });
+return false;
+        }
+    });
+});
+function getCountry(auth_token)
+{
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/countries/",
+success:function(data){
+getState(auth_token);
+},
+error:function(error){
+alert('error');
+},
+headers:{
+"Authorization": "Bearer "+auth_token ,
+  "Accept": "application/json"
+}
+});
+
+
+}
+
+function getState()
+{
+let country_name='India';
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/states/"+country_name,
+success:function(data){
+$("#state").empty();
+data.forEach(element=>{
+$("#state").append('<option value="'+element.state_name+'">'+element.state_name+'</option>');
+});
+},
+error:function(error){
+alert('error');
+},
+headers:{
+"Authorization": "Bearer "+auth_token ,
+  "Accept": "application/json"
+}
+});
+
+
+}
+
+
+function getCity()
+{
+let state_name=$("#state").val();
+$.ajax({
+type:'get',
+url:"https://www.universal-tutorial.com/api/cities/"+state_name,
+success:function(data){
+$("#city").empty();
+data.forEach(element=>{
+$("#city").append('<option value="'+element.city_name+'">'+element.city_name+'</option>');
+});
+
+
+},
+error:function(error){
+alert('error');
+},
+headers:{
+"Authorization": "Bearer "+auth_token ,
+  "Accept": "application/json"
+}
+});
+
+
+}
+
+
+
+</script>
+
+
+
+	</body>
+</html>

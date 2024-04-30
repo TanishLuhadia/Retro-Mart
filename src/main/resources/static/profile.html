@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Viewer</title>
+    <!-- Add your CSS stylesheets or link to external stylesheets here -->
+    <style>
+        /* Add your CSS styles here */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .profile-info {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .profile-info img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+        .profile-info img:hover {
+            transform: scale(1.1);
+        }
+        .profile-info h2 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .profile-info p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .listing {
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+            transition: box-shadow 0.3s ease-in-out;
+        }
+        .listing img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+        .listing h3 {
+            margin: 10px 0;
+            color: #333;
+        }
+        .listing p {
+            margin: 5px 0;
+            color: #666;
+        }
+        .listing-options {
+            text-align: right;
+        }
+        .listing-options a {
+            margin-left: 10px;
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+        }
+        .listing-options a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile-info">
+            <img id="profile-pic" src="profile_picture.jpg" alt="Profile Picture">
+            <h2 id='name'></h2>
+            <p id='email'></p>
+            <!-- Add more profile information as needed -->
+            <form id="profile-form" enctype="multipart/form-data" method="post">
+                <input type="file" name="profile-pic" id="profile-pic-input">
+                <input type="submit" value="Upload Profile Photo" name="submit-profile">
+            </form>
+        </div>
+       <!-- More listings can be added similarly -->
+    </div>
+</body>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+<script>
+$.ajax({
+    url: "/getLoggedInUser",
+    method: "GET",
+    success: function(data) {
+        $.ajax({
+            url: "/user/getUser",
+            method: "GET",
+            data: {
+                "email": data
+            },
+            success: function(user) {
+                $("#name").html(user.firstName + " " + user.lastName);
+                $("#email").html("Email: " + data);
+
+                $.ajax({
+                    url: "/car/getByEmail",
+                    method: "POST",
+                    data: {
+                        "email": data
+                    },
+                    success: function(cars) {
+                        cars.forEach(function(car) {
+                            var listingDiv = $('<div class="listing">');
+                            var image = $('<img src="" alt="Listing Image">');
+                            var brandName = $('<h3>');
+                            var description = $('<p>');
+                            var optionsDiv = $('<div class="listing-options">');
+                            var editLink = $('<a href="#">Edit</a>');
+                            var deleteLink = $('<a href="#">Delete</a>');
+                            var markAsSoldLink = $('<a href="#">Mark as Sold</a>');
+
+                            $.ajax({
+                                url: "/image/getImageByCarId",
+                                method: "GET",
+                                data: {
+                                    "carId": car.id
+                                },
+                                success: function(imageData) {
+                                    var imageUrl = "/images/" + imageData.frontImage;
+                                    image.attr('src', imageUrl);
+                                },
+                                error: function(xhr, status, error) {
+                                    console.error("Failed to fetch image:", error);
+                                }
+                            });
+
+                            brandName.text(car.brand + " " + car.model);
+                            description.text(car.features);
+
+                            optionsDiv.append(editLink, deleteLink, markAsSoldLink);
+
+                            listingDiv.append(image, brandName, description, optionsDiv);
+                            $('.container').append(listingDiv);
+                        });
+                    },
+                    error: function(xhr, status, error) {
+                        console.error("Failed to fetch car data:", error);
+                    }
+                });
+            },
+            error: function(xhr, status, error) {
+                console.error("Failed to fetch user data:", error);
+            }
+        });
+    },
+    error: function(xhr, status, error) {
+        console.error("Failed to fetch logged-in user:", error);
+    }
+});
+</script>
+</html>
